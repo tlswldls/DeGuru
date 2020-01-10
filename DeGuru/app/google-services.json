@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "112021674900",
+    "firebase_url": "https://deguru-c920d.firebaseio.com",
+    "project_id": "deguru-c920d",
+    "storage_bucket": "deguru-c920d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:112021674900:android:cc9434736e2075b124cd81",
+        "android_client_info": {
+          "package_name": "org.techtown.deguru"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "112021674900-o8cc6ecl25tutscm64kvtdce8n49petn.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "org.techtown.deguru",
+            "certificate_hash": "a2b0fb5ecc2ac1ffcea33a3d627cf54a93e2cc56"
+          }
+        },
+        {
+          "client_id": "112021674900-0r03uchakkbnlsuddmppcphsvd3nqjcn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAXre0o5GSq6gaSXIBMHwFUJ6vHP4QvMFQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "112021674900-0r03uchakkbnlsuddmppcphsvd3nqjcn.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
