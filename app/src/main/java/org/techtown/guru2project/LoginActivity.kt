@@ -27,9 +27,9 @@ class LoginActivity : AppCompatActivity() {
         }
 
         //로그인 버튼
-        //logInBtn2.setOnClickListener {
-        //    emailLogin()
-        //}
+        loginBtn_login.setOnClickListener {
+            emailLogin()
+        }
     }
 
     private fun emailLogin(){

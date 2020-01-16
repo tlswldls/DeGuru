@@ -15,8 +15,12 @@ class JoinActivity : AppCompatActivity() {
 
         auth = FirebaseAuth.getInstance()
 
-        loginBtn_join.setOnClickListener{
+        joinBtn_join.setOnClickListener{
             createAndLoginEmail()
+        }
+
+        loginBtn_join.setOnClickListener {
+            finish()
         }
     }
 
@@ -36,9 +40,8 @@ class JoinActivity : AppCompatActivity() {
             ?.addOnCompleteListener { task->
                 if(task.isSuccessful){
                     Toast.makeText(this, "회원가입 성공. 환영합니다.", Toast.LENGTH_LONG).show()
-                    finish()
                 }else{
-                    Toast.makeText(this, task.exception?.message, Toast.LENGTH_LONG).show()
+                    Toast.makeText(this, "회원가입에 실패했습니다. 메일 주소를 확인해주세요.", Toast.LENGTH_LONG).show()
                 }
             }
     }
