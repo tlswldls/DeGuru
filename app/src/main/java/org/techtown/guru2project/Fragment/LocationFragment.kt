@@ -59,7 +59,7 @@ class LocationFragment : Fragment() {
         client.newCall(request_p).enqueue(object: okhttp3.Callback{
             override fun onFailure(call: okhttp3.Call, e: IOException) {
                 val body = e.message
-                resultTxt.text = body
+                //Toast.makeText(this, body, Toast.LENGTH_LONG).show()
             }
 
             override fun onResponse(call: okhttp3.Call, response: okhttp3.Response) {
