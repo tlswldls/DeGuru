@@ -9,34 +9,34 @@
     app:layout_anchorGravity="center">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
+        android:layout_width="350dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="150dp"
+            android:layout_marginTop="50dp"
             android:orientation="vertical"
             app:layout_constraintTop_toTopOf="parent">
 
             <TextView
                 android:id="@+id/todoText_join"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="To Do!"
-                android:textSize="50sp"
-                app:fontFamily="aGothic13"/>
+                android:text="오\n늘\n할\n일"
+                android:textSize="40sp"
+                app:fontFamily="aSymphony" />
 
             <TextView
-                android:id="@+id/loginText_join"
+                android:id="@+id/joinText_join"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:text="회원가입"
                 android:textSize="24sp"
-                app:fontFamily="aGothic12"/>
+                app:fontFamily="aGothic12" />
 
         </LinearLayout>
 
@@ -51,40 +51,79 @@
             android:id="@+id/emailEdit_join"
             android:layout_width="320dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="25dp"
+            android:layout_marginTop="60dp"
+            android:background="@drawable/editbox"
             android:ems="10"
-            android:hint="이메일"
+            android:hint="    이메일"
             android:inputType="textEmailAddress"
             android:textSize="14sp"
+            app:fontFamily="aGothic11"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:fontFamily="aGothic11"/>
+            app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
             android:id="@+id/pwEdit_join"
             android:layout_width="320dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="100dp"
+            android:layout_marginTop="115dp"
+            android:background="@drawable/editbox"
             android:ems="10"
-            android:hint="패스워드"
+            android:hint="    패스워드"
             android:inputType="textPassword"
             android:textSize="14sp"
+            app:fontFamily="aGothic11"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:fontFamily="aGothic11"/>
+            app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
             android:id="@+id/editText"
             android:layout_width="320dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="175dp"
+            android:layout_marginTop="170dp"
+            android:background="@drawable/editbox"
             android:ems="10"
-            android:hint="패스워드 확인"
+            android:hint="    패스워드 확인"
             android:inputType="textPassword"
             android:textSize="14sp"
+            app:fontFamily="aGothic11"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:fontFamily="aGothic11"/>
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/loginText2_login2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="120dp"
+            android:layout_marginTop="12dp"
+            android:text="회원가입 완료"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editText" />
+
+        <ImageButton
+            android:id="@+id/joinBtn_join"
+            android:layout_width="81dp"
+            android:layout_height="19dp"
+            android:layout_marginStart="120dp"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/alphabtn"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editText"
+            app:srcCompat="@drawable/alphabtn" />
+
+        <EditText
+            android:id="@+id/userEdit_join"
+            android:layout_width="320dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/editbox"
+            android:ems="10"
+            android:hint="    사용자 이름"
+            android:inputType="textPersonName"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -98,24 +137,33 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginStart="193dp"
-            android:layout_marginLeft="193dp"
-            android:layout_marginBottom="38dp"
+            android:layout_marginTop="30dp"
             android:text="또는"
-            app:layout_constraintBottom_toTopOf="@+id/loginBtn_join"
+            app:fontFamily="aGothic12"
             app:layout_constraintStart_toStartOf="parent"
-            app:fontFamily="aGothic12"/>
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/loginText_join"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="188dp"
+            android:layout_marginBottom="100dp"
+            android:text="로그인"
+            app:fontFamily="aGothic13"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
         <ImageButton
             android:id="@+id/loginBtn_join"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginStart="186dp"
-            android:layout_marginLeft="186dp"
-            android:layout_marginBottom="150dp"
+            android:layout_width="43dp"
+            android:layout_height="22dp"
+            android:layout_marginStart="188dp"
+            android:layout_marginBottom="100dp"
+            android:background="@drawable/alphabtn"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:srcCompat="@android:drawable/arrow_down_float" />
+            app:srcCompat="@drawable/alphabtn" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
