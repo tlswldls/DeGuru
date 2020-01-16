@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "120191871528",
+    "firebase_url": "https://guru2project-6a25c.firebaseio.com",
+    "project_id": "guru2project-6a25c",
+    "storage_bucket": "guru2project-6a25c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:120191871528:android:be08daee5d1d585898a31d",
+        "android_client_info": {
+          "package_name": "org.techtown.guru2project"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "120191871528-j1veei3dk3l70v6g255kmr7fct5vq4q7.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "org.techtown.guru2project",
+            "certificate_hash": "a2b0fb5ecc2ac1ffcea33a3d627cf54a93e2cc56"
+          }
+        },
+        {
+          "client_id": "120191871528-60qitt49d4vh6f0nssh2i669i496mkld.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCVdAuEBwwTAexb6ky1Jx4N8HeVjvn1cRU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "120191871528-60qitt49d4vh6f0nssh2i669i496mkld.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
