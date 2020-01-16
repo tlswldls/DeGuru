@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="350dp"
+        android:layout_height="wrap_content">
+
+        <ImageButton
+            android:id="@+id/backBtn_menu"
+            android:layout_width="42dp"
+            android:layout_height="42dp"
+            android:layout_marginTop="38dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@android:drawable/ic_delete" />
+
+        <TextView
+            android:id="@+id/infoText_menu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="50dp"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="35dp"
+            android:text="계정 정보"
+            android:textSize="36sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:fontFamily="aGothic13" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="350dp"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/useridText_menu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="130dp"
+            android:text="사용자 이메일 값"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:fontFamily="aGothic12"/>
+
+        <ImageView
+            android:id="@+id/barImg1_menu"
+            android:layout_width="350dp"
+            android:layout_height="5dp"
+            android:layout_marginTop="155dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@android:drawable/bottom_bar"
+            tools:srcCompat="@android:drawable/bottom_bar" />
+
+        <TextView
+            android:id="@+id/userText_menu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="200dp"
+            android:text="사용자 이름"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:fontFamily="aGothic12"/>
+
+        <ImageView
+            android:id="@+id/barImg2_menu"
+            android:layout_width="350dp"
+            android:layout_height="5dp"
+            android:layout_marginTop="225dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@android:drawable/bottom_bar"
+            tools:srcCompat="@android:drawable/bottom_bar" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageButton
+                android:id="@+id/logoutBtn_menu"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="131dp"
+                android:layout_marginLeft="131dp"
+                android:layout_marginTop="140dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@android:drawable/arrow_down_float" />
+
+            <ImageButton
+                android:id="@+id/deleteBtn_menu"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="131dp"
+                android:layout_marginLeft="131dp"
+                android:layout_marginTop="250dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@android:drawable/arrow_up_float" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </LinearLayout>
+</LinearLayout>
