@@ -17,22 +17,23 @@
             android:id="@+id/backBtn_menu"
             android:layout_width="42dp"
             android:layout_height="42dp"
-            android:layout_marginTop="38dp"
+            android:layout_marginTop="35dp"
+            android:background="@drawable/alphabtn"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@android:drawable/ic_delete" />
+            tools:srcCompat="@drawable/backbtn" />
 
         <TextView
             android:id="@+id/infoText_menu"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="50dp"
-            android:layout_marginLeft="50dp"
+            android:layout_marginStart="8dp"
             android:layout_marginTop="35dp"
             android:text="설정"
             android:textSize="36sp"
-            app:fontFamily="aGothic13"
-            app:layout_constraintStart_toStartOf="parent"
+            android:textColor="@color/navy"
+            app:fontFamily="@font/gothic13"
+            app:layout_constraintStart_toEndOf="@+id/backBtn_menu"
             app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -42,7 +43,32 @@
         android:layout_width="409dp"
         android:layout_height="59dp"
         android:layout_marginTop="16dp"
-        app:tabMode="fixed" />
+        app:tabMode="fixed" >
+
+        <com.google.android.material.tabs.TabItem
+            android:id="@+id/tabItem2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tab2" />
+
+        <com.google.android.material.tabs.TabItem
+            android:id="@+id/tabItem3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tab2" />
+
+        <com.google.android.material.tabs.TabItem
+            android:id="@+id/tabItem4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tab2" />
+
+        <com.google.android.material.tabs.TabItem
+            android:id="@+id/tabItem5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tab2" />
+    </com.google.android.material.tabs.TabLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
