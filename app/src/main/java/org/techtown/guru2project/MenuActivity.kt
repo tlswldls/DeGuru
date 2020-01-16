@@ -3,6 +3,8 @@ package org.techtown.guru2project
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
+import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.activity_menu.*
 
@@ -21,12 +23,29 @@ class MenuActivity : AppCompatActivity() {
 
         deleteBtn_menu.setOnClickListener {
             //파이어베이스에서 사용자 계정 삭제하는 코드
+            deleteID()
             val intent = intent?:return@setOnClickListener
-            intent.putExtra(MainActivity.RESULT, "logout")  //이거 로그아웃 딜리트로 바꿔야함
+            intent.putExtra(MainActivity.RESULT, "delete")
             setResult(MainActivity.REQUEST_CODE, intent)
-            emailEdit_login.setText("")
-            pwEdit_login.setText("")
             finish()
+        }
+
+        backBtn_menu.setOnClickListener {
+            val intent = intent?:return@setOnClickListener
+            intent.putExtra(MainActivity.RESULT, "result")
+            setResult(MainActivity.REQUEST_CODE, intent)
+            finish()
+        }
+    }
+
+    private fun deleteID(){
+        FirebaseAuth.getInstance().currentUser!!.delete(). addOnCompleteListener { task ->
+            if(task.isSuccessful){
+                Toast.makeText(this, "탈퇴가 완료되었습니다.", Toast.LENGTH_LONG).show()
+                FirebaseAuth.getInstance().signOut()
+            }else{
+                Toast.makeText(this, task.exception.toString(), Toast.LENGTH_LONG).show()
+            }
         }
     }
 

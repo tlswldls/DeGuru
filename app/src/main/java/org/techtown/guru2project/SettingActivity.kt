@@ -22,5 +22,9 @@ class SettingActivity : AppCompatActivity() {
 //        tabLayout.getTabAt(0)?.setIcon(R.drawable.icon1)
 //        tabLayout.getTabAt(1)?.setIcon(R.drawable.icon2)
 //        tabLayout.getTabAt(2)?.setIcon(R.drawable.icon3)
+
+        backBtn_menu.setOnClickListener {
+            finish()
+        }
     }
 }

@@ -22,14 +22,19 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this, MenuActivity::class.java)
             startActivityForResult(intent, REQUEST_CODE)
         }
+
+        imageButton.setOnClickListener {
+            val intent = Intent(this, SettingActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if(requestCode!= REQUEST_CODE) return
         val res = data?.getStringExtra(RESULT)
-        if(res== "logout"){
-            val intent = Intent(this, LoginActivity::class.java)
-            startActivity(intent)
+        if(res== "logout" || res=="delete"){
+            //val intent = Intent(this, LoginActivity::class.java)
+            //startActivity(intent)
             finish()
         }
         super.onActivityResult(requestCode, resultCode, data)
