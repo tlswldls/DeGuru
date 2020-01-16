@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:gravity="center"
     android:orientation="vertical"
+    android:background="@color/backgroundColor"
     tools:context=".MainActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -25,16 +26,16 @@
                 android:layout_height="wrap_content"
                 android:text="화요일"
                 android:textSize="36sp"
-                app:fontFamily="aGothic13" />
+                app:fontFamily="@font/gothic13" />
 
             <TextView
                 android:id="@+id/dateText_main"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="01.14"
+                android:text="  01.14"
                 android:textSize="18sp"
-                app:fontFamily="aGothic11"/>
+                app:fontFamily="@font/gothic11"/>
 
             <ImageButton
                 android:id="@+id/meueBrn_main"
@@ -42,8 +43,8 @@
                 android:layout_height="42dp"
                 android:layout_gravity="center|right"
                 android:contentDescription="TODO"
-                app:srcCompat="@drawable/ic_launcher_foreground"
-                tools:srcCompat="@android:drawable/btn_star_big_on" />
+                android:background="@drawable/alphabtn"
+                tools:srcCompat="@drawable/menu_icon" />
 
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -54,13 +55,15 @@
 
         <EditText
             android:id="@+id/editText_main"
-            android:layout_width="320dp"
+            android:layout_width="370dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
+            android:background="@drawable/search"
             android:ems="10"
-            android:hint="add a new task"
+            android:hint="    할 일을 추가해주세요."
             android:inputType="textPersonName"
-            app:fontFamily="aGothic11"
+            android:textSize="14sp"
+            app:fontFamily="@font/gothic11"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -73,16 +76,17 @@
             android:textSize="18sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:fontFamily="aGothic12"/>
+            app:fontFamily="@font/gothic12"/>
 
         <ImageButton
             android:id="@+id/imageButton"
-            android:layout_width="42dp"
-            android:layout_height="42dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:layout_marginTop="15dp"
+            android:background="@drawable/alphabtn"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/common_google_signin_btn_icon_dark_normal_background" />
+            tools:srcCompat="@drawable/addbtn" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -99,7 +103,8 @@
 
             <androidx.recyclerview.widget.RecyclerView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                app:fontfamily="@font/agothic11"  />
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
