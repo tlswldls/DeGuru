@@ -11,4 +11,9 @@
         android:layout_height="match_parent"
         android:text="date" />
 
+    <CalendarView
+        android:id="@+id/calendarView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
 </FrameLayout>
