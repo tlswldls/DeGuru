@@ -2,7 +2,9 @@ package org.techtown.guru2project
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import kotlinx.android.synthetic.main.activity_setting.*
+import kotlinx.android.synthetic.main.fragment_date.*
 import org.techtown.guru2project.Fragment.*
 
 class SettingActivity : AppCompatActivity() {
@@ -26,5 +28,7 @@ class SettingActivity : AppCompatActivity() {
         backBtn_menu.setOnClickListener {
             finish()
         }
+
+
     }
 }
