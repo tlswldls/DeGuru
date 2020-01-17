@@ -50,9 +50,10 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        var email:String = ""
 
         if(intent.hasExtra("mail")){
-            val email = intent.getStringExtra("mail")
+            email = intent.getStringExtra("mail")
             Toast.makeText(this, "환영합니다"+email+"님", Toast.LENGTH_LONG).show()
         }else{
             Toast.makeText(this, "로그인 정보를 가져오기에 실패했습니다.", Toast.LENGTH_LONG).show()
@@ -60,6 +61,7 @@ class MainActivity : AppCompatActivity() {
 
         meueBrn_main2.setOnClickListener {
             val intent = Intent(this, MenuActivity::class.java)
+            intent.putExtra("mail", email)
             startActivityForResult(intent, REQUEST_CODE)
         }
 
