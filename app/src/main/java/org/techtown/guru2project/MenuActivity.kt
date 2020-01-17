@@ -9,16 +9,14 @@ import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.activity_menu.*
 
 class MenuActivity : AppCompatActivity() {
-    //이거 필요 없어요 메인 액티비티에서 받아옵니다.
-    companion object{
-        val REQUEST_CODE = 0
-        val EMAIL = "email"
-    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_menu)
-        //이거도 수정
-        useridText_menu.text = EMAIL
+        if(intent.hasExtra("mail")){
+            useridText_menu.text = intent.getStringExtra("mail")
+        }else{
+            useridText_menu.text = "User"
+        }
 
         logoutBtn_menu.setOnClickListener {
             val intent = intent?:return@setOnClickListener
