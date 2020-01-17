@@ -1,13 +1,24 @@
 package org.techtown.guru2project.Fragment
 
+import android.Manifest
+import android.app.AlertDialog
+import android.content.pm.PackageManager
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationCallback
 import com.google.android.gms.location.LocationRequest
+import com.google.android.gms.location.LocationResult
 import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.OnMapReadyCallback
+import com.google.android.gms.maps.model.LatLng
 import kotlinx.android.synthetic.main.fragment_location.*
 import okhttp3.HttpUrl.Companion.toHttpUrlOrNull
 import okhttp3.OkHttpClient
@@ -25,8 +36,12 @@ import javax.xml.parsers.DocumentBuilderFactory
 
 private const val REQUEST_ACCESS_FINE_LOCATION = 1000
 
-class LocationFragment : Fragment() {
-
+class LocationFragment : Fragment(), OnMapReadyCallback{
+    val serviceKey = "nynKQpN7ybxaSAstA9pWvReQOXQ9pP9ENPUKE%2BmoT%2BOCmvTMUtMhFQNoosQ9sMNvRMGK43nNWoTIcdDFZkUHkg%3D%3D"
+    private lateinit var mMap: GoogleMap    // 1
+    private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
+    private lateinit var locationRequest: LocationRequest
+    private lateinit var locationCallback: MyLocationCallBack
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -37,6 +52,7 @@ class LocationFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        // API 이용해서 검색한 장소의 위도, 경도 받아오는 코드 //
         super.onViewCreated(view, savedInstanceState)
         searchBtn.setOnClickListener{
             //val positions: List<Float>
@@ -49,7 +65,8 @@ class LocationFragment : Fragment() {
 
             }
         }
-
+        /* 나의 현재 위도, 경도 가져오는 코드*/
+        locationInit()
     }
 
     private fun getData(serviceKey: String, name: String): String{
@@ -165,6 +182,8 @@ class LocationFragment : Fragment() {
 
         //위도 경도 넘겨주기
         return result
+
+
     }
 
     private fun getRequestUrl_p(serviceKey: String,
@@ -217,6 +236,151 @@ class LocationFragment : Fragment() {
         return position
     }
 
-    /* 나의 GPS 받아오기 */
 
+    // 위치 정보를 얻기 위한 각종 초기화
+    private fun locationInit() {
+        Log.e("c", "도착했습니다")
+        fusedLocationProviderClient = FusedLocationProviderClient(activity!!)
+
+        locationCallback = MyLocationCallBack()
+
+        locationRequest = LocationRequest()
+        // GPS 우선
+        locationRequest.priority = LocationRequest.PRIORITY_HIGH_ACCURACY
+        // 업데이트 인터벌
+        // 위치 정보가 없을 때는 업데이트 안 함
+        // 상황에 따라 짧아질 수 있음, 정확하지 않음
+        // 다른 앱에서 짧은 인터벌로 위치 정보를 요청하면 짧아질 수 있음
+        locationRequest.interval = 10000
+        // 정확함. 이것보다 짧은 업데이트는 하지 않음
+        locationRequest.fastestInterval = 5000
+    }
+
+    /**
+     * 사용 가능한 맵을 조작합니다.
+     * 지도가 사용될 준비가 되면 이 콜백이 호출됩니다.
+     * 여기서 마커나 선을 추가하거나 청취자를 추가하거나 카메라를 이동할 수 있습니다.
+     * 호주 시드니 근처에 표식을 추가하고 있습니다.
+     * Google Play 서비스가 기기에 설치되어 있지 않으면 사용자에게 설치하라는 메시지가 표시됩니다.
+     * SupportMapFragment 안에 있습니다. 이 메소드는 한 번만 호출됩니다.
+     * Google Play 서비스가 설치되고 앱으로 돌아 옵니다.
+     */
+
+    override fun onMapReady(p0: GoogleMap?) {
+
+        //mMap = googleMap    // 3
+/*
+        // 시드니에 마커를 추가하고 카메라를 이동합니다     4
+        val sydney = LatLng(-34.0, 151.0)
+        mMap.addMarker(MarkerOptions().position(sydney).title("Marker in Sydney"))
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney))
+*/
+        // 권한 요청
+        permissionCheck(cancel = {
+            showPermissionInfoDialog()
+        }, ok = {
+            mMap.isMyLocationEnabled = true
+        })
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        // 권한 요청 ⑨
+        permissionCheck(cancel = {
+            // 위치 정보가 필요한 이유 다이얼로그 표시 ⑩
+            showPermissionInfoDialog()
+        }, ok = {
+            // 현재 위치를 주기적으로 요청 (권한이 필요한 부분) ⑪
+            addLocationListener()
+        })
+    }
+
+    private fun addLocationListener() {
+        fusedLocationProviderClient.requestLocationUpdates(locationRequest,
+            locationCallback,
+            null)
+    }
+
+    private fun showPermissionInfoDialog() {
+        AlertDialog.Builder(context).apply {
+            setTitle("권한이 필요한 이유")
+            setMessage("현재 위치 정보를 얻기 위해서는 위치 권한이 필요합니다")
+            setPositiveButton("Yes") { dialog, which ->
+                // 권한 요청
+                ActivityCompat.requestPermissions(
+                    activity!!,
+                    arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
+                    REQUEST_ACCESS_FINE_LOCATION
+                )
+            }
+            setNegativeButton("Cancel", null)
+        }.show()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        // ①
+        removeLocationListener()
+    }
+
+    private fun removeLocationListener() {
+        // 현재 위치 요청을 삭제 ②
+        fusedLocationProviderClient.removeLocationUpdates(locationCallback)
+    }
+
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        when (requestCode) {
+            REQUEST_ACCESS_FINE_LOCATION -> {
+                if ((grantResults.isNotEmpty()
+                            && grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
+                    // 권한 허용됨
+                    addLocationListener()
+                } else {
+                    // 권한 거부
+                    Toast.makeText(context!!,"권한 거부 됨",Toast.LENGTH_LONG).show()
+                }
+                return
+            }
+        }
+    }
+
+    private fun permissionCheck(cancel: () -> Unit, ok: () -> Unit) {
+        // 위치 권한이 있는지 검사
+        if (ContextCompat.checkSelfPermission(context!!,
+                Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // 권한이 허용되지 않음
+            if (ActivityCompat.shouldShowRequestPermissionRationale(activity!!, Manifest.permission.ACCESS_FINE_LOCATION)) {
+                // 이전에 권한을 한 번 거부한 적이 있는 경우에 실행할 함수
+                cancel()
+            } else {
+                // 권한 요청
+                ActivityCompat.requestPermissions(activity!!,
+                    arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
+                    REQUEST_ACCESS_FINE_LOCATION)
+            }
+        } else {
+            // 권한을 수락 했을 때 실행할 함수
+            ok()
+        }
+    }
+
+    inner class MyLocationCallBack : LocationCallback() {
+        override fun onLocationResult(locationResult: LocationResult?) {
+            super.onLocationResult(locationResult)
+
+            val location = locationResult?.lastLocation
+
+            location?.run {
+                // 14 level로 확대하며 현재 위치로 카메라 이동
+                val latLng = LatLng(latitude, longitude)
+                //mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 17f))
+
+                textView2.text = "나의 위도: $latitude, 나의 경도: $longitude"
+            }
+
+        }
+    }
 }
+
