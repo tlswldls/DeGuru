@@ -12,6 +12,8 @@ class SettingActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_setting)
 
+        var todo:Todo?
+
         /* tabLayout, viewPager 설정 */
         val adapter = ViewPagerAdapter(supportFragmentManager)
         adapter.addFragment(DateFragment(), "Date")
