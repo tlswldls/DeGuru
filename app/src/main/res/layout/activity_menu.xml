@@ -32,7 +32,7 @@
             android:text="계정 정보"
             android:textColor="@color/navy"
             android:textSize="36sp"
-            app:fontFamily="@font/gothic13"
+            app:fontFamily="@font/symphony"
             app:layout_constraintStart_toEndOf="@+id/backBtn_menu"
             app:layout_constraintTop_toTopOf="parent" />
 

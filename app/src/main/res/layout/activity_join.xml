@@ -25,7 +25,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="오\n늘\n할\n일"
+                android:text="아\n｜\n맞\n다"
                 android:textSize="40sp"
                 android:textColor="#14415E"
                 android:lineSpacingExtra ="10dp"
@@ -56,9 +56,11 @@
             android:layout_marginTop="15dp"
             android:background="@drawable/editbox"
             android:ems="10"
-            android:hint="    이메일"
+            android:hint="이메일"
             android:inputType="textEmailAddress"
+            android:paddingLeft="18dp"
             android:textSize="14sp"
+            android:width="320dp"
             app:fontFamily="@font/gothic11"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -70,9 +72,10 @@
             android:layout_marginTop="16dp"
             android:background="@drawable/editbox"
             android:ems="10"
-            android:hint="    패스워드"
+            android:hint="패스워드"
             android:inputType="textPassword"
             android:textSize="14sp"
+            android:paddingLeft="18dp"
             app:fontFamily="@font/gothic11"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/emailEdit_join" />
@@ -84,9 +87,10 @@
             android:layout_marginTop="16dp"
             android:background="@drawable/editbox"
             android:ems="10"
-            android:hint="    패스워드 확인"
+            android:hint="패스워드 확인"
             android:inputType="textPassword"
             android:textSize="14sp"
+            android:paddingLeft="18dp"
             app:fontFamily="@font/gothic11"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/pwEdit_join" />
@@ -106,7 +110,7 @@
             tools:srcCompat="@drawable/alphabtn" />
 
         <TextView
-            android:id="@+id/loginText2_login2"
+            android:id="@+id/joinText2_join"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="132dp"

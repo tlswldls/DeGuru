@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:gravity="center"
     android:orientation="vertical"
-    android:background="@drawable/background_login"
+    android:background="@color/backgroundColor"
     tools:context=".MainActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -21,7 +21,7 @@
             android:background="@drawable/alphabtn"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/backbtn" />
+            tools:srcCompat="@drawable/backbtn" />
 
         <TextView
             android:id="@+id/infoText_menu"
@@ -29,10 +29,10 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="35dp"
-            android:text="설정"
+            android:text="일정추가"
             android:textSize="36sp"
             android:textColor="@color/navy"
-            app:fontFamily="@font/gothic13"
+            app:fontFamily="@font/symphony"
             app:layout_constraintStart_toEndOf="@+id/backBtn_menu"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -45,17 +45,13 @@
         android:layout_marginTop="16dp"
         app:tabMode="fixed">
 
-        <com.google.android.material.tabs.TabItem
-            android:id="@+id/tabItem2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Tab2" />
 
         <com.google.android.material.tabs.TabItem
             android:id="@+id/tabItem3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Tab2" />
+            android:text="tab2"
+            />
 
         <com.google.android.material.tabs.TabItem
             android:id="@+id/tabItem4"
