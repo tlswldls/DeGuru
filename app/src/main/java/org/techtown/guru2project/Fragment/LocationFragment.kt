@@ -7,13 +7,13 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import kotlinx.android.synthetic.main.fragment_location.*
+import okhttp3.*
 import okhttp3.HttpUrl.Companion.toHttpUrlOrNull
-import okhttp3.OkHttpClient
-import okhttp3.Request
 import org.techtown.guru2project.R
 import org.w3c.dom.Element
 import java.io.IOException
 import java.lang.Exception
+import java.util.concurrent.CountDownLatch
 import javax.xml.parsers.DocumentBuilderFactory
 
 
@@ -21,6 +21,7 @@ import javax.xml.parsers.DocumentBuilderFactory
  * A simple [Fragment] subclass.
  */
 class LocationFragment : Fragment() {
+    val serviceKey = "nynKQpN7ybxaSAstA9pWvReQOXQ9pP9ENPUKE%2BmoT%2BOCmvTMUtMhFQNoosQ9sMNvRMGK43nNWoTIcdDFZkUHkg%3D%3D"
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -31,14 +32,12 @@ class LocationFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        val serviceKey = "nynKQpN7ybxaSAstA9pWvReQOXQ9pP9ENPUKE%2BmoT%2BOCmvTMUtMhFQNoosQ9sMNvRMGK43nNWoTIcdDFZkUHkg%3D%3D"
-
         super.onViewCreated(view, savedInstanceState)
         searchBtn.setOnClickListener{
             //val positions: List<Float>
             if(enSearch.text.isNotEmpty()){
                 try{
-                    getData(serviceKey, enSearch.text.toString())
+                    resultTxt.text = getData(serviceKey, enSearch.text.toString())
                 }catch(e: Exception){
                     resultTxt.text = e.message
                 }
@@ -48,29 +47,34 @@ class LocationFragment : Fragment() {
 
     }
 
-    private fun getData(serviceKey: String, name: String): List<Array<Float>>{
+    private fun getData(serviceKey: String, name: String): String{
         var positions = mutableListOf<Array<Float>>()
         val request_p = getRequestUrl_p(serviceKey, name)
-        val request_m = getRequestUrl_m(serviceKey, name)
+        val request_h = getRequestUrl_h(serviceKey, name)
         val client = OkHttpClient()
+        val itemList: ArrayList<HashMap<String, String>> = ArrayList()
 
         var result:String=""
 
+        /*
+
+         */
+        var lanch1 = CountDownLatch(1)
         client.newCall(request_p).enqueue(object: okhttp3.Callback{
             override fun onFailure(call: okhttp3.Call, e: IOException) {
                 val body = e.message
+                lanch1.countDown()
                 //Toast.makeText(this, body, Toast.LENGTH_LONG).show()
             }
 
             override fun onResponse(call: okhttp3.Call, response: okhttp3.Response) {
-                val itemList: ArrayList<HashMap<String, String>> = ArrayList()
                 val body = response.body?.string()?.byteInputStream()
                 val buildFactory = DocumentBuilderFactory.newInstance()
                 val docBuilder = buildFactory.newDocumentBuilder()
                 val doc = docBuilder.parse(body, null)
                 val nList = doc.getElementsByTagName("item")
 
-                for(n in 0 until nList.length){
+                for(n in 0 until nList.length) {
                     val element = nList.item(n) as Element
                     val dataHashMap = HashMap<String, String>()
                     dataHashMap.put("addr", getValueFromKey(element, "addr"))
@@ -89,20 +93,15 @@ class LocationFragment : Fragment() {
 
                     itemList.add(dataHashMap)
                 }
-
-                //위도 경도 값을 숫자로 바꾸기
-                for (n in 0 until itemList.size){
-                    var position = toNum(itemList[n].get("XPos").toString(), itemList[n].get("YPos").toString())
-
-                    positions.add(position)
-                }
+                lanch1.countDown()
             }
         })
+        lanch1.await()
 
-        client.newCall(request_m).enqueue(object : okhttp3.Callback {
+        var lanch2 = CountDownLatch(1)
+        client.newCall(request_h).enqueue(object : okhttp3.Callback {
 
             override fun onResponse(call: okhttp3.Call, response: okhttp3.Response){
-                val itemList: ArrayList<HashMap<String, String>> = ArrayList()
                 val body = response.body?.string()?.byteInputStream()
                 val buildFactory = DocumentBuilderFactory.newInstance()
                 val docBuilder = buildFactory.newDocumentBuilder()
@@ -138,14 +137,15 @@ class LocationFragment : Fragment() {
 
                 //위도 경도 값을 숫자로 바꾸기
                 for (n in 0 until itemList.size){
-                    var position = toNum(itemList[n].get("XPos").toString(), itemList[n].get("YPos").toString()) //x좌표를 배열에 추가
+                    var position = toNum(itemList[n].get("XPos").toString(), itemList[n].get("YPos").toString()) //x, y좌표를 배열에 추가
 
                     positions.add(position)
                 }
-                    for(n in 0 until positions.size){
-                        result = result+"["+positions[n][0]+", "+positions[n][1]+"] "
-                    }
 
+                for(n in 0 until positions.size){
+                        result = result+"["+positions[n][0]+", "+positions[n][1]+"] "
+                }
+                lanch2.countDown()
                     //resultTxt.text = result
             }
 
@@ -153,11 +153,13 @@ class LocationFragment : Fragment() {
             override fun onFailure(call: okhttp3.Call, e: IOException) {
                 val body = e.message
                 resultTxt.text = body
+                lanch2.countDown()
             }
         })
+        lanch2.await()
 
         //위도 경도 넘겨주기
-        return positions
+        return result
     }
 
     private fun getRequestUrl_p(serviceKey: String,
@@ -178,7 +180,7 @@ class LocationFragment : Fragment() {
                 "application/x-www-form-urlencoded; text/xml; charset=utf-8")
             .build()
     }
-    private fun getRequestUrl_m(serviceKey: String,
+    private fun getRequestUrl_h(serviceKey: String,
                                 name: String) : Request {
 
         var url = "http://apis.data.go.kr/B551182/hospInfoService/getHospBasisList"
