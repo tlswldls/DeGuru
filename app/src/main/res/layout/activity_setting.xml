@@ -21,7 +21,7 @@
             android:background="@drawable/alphabtn"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:srcCompat="@drawable/backbtn" />
+            app:srcCompat="@drawable/backbtn" />
 
         <TextView
             android:id="@+id/infoText_menu"

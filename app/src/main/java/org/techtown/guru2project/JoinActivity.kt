@@ -4,10 +4,13 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_join.*
+import org.jetbrains.anko.email
 
 class JoinActivity : AppCompatActivity() {
     private var auth: FirebaseAuth? = null
+    private var firestore:FirebaseFirestore? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,10 +39,21 @@ class JoinActivity : AppCompatActivity() {
             return
         }
 
+        val mail = emailEdit_join.text.toString()
         auth?.createUserWithEmailAndPassword(emailEdit_join.text.toString(), pwEdit_join.text.toString())
             ?.addOnCompleteListener { task->
                 if(task.isSuccessful){
-                    Toast.makeText(this, "회원가입 성공. 환영합니다.", Toast.LENGTH_LONG).show()
+                    val todo:Todo = Todo("할 일을 입력하세요.", "", "", "", "", "", "")
+                    val document = "할 일을 입력하세요."
+                    firestore = FirebaseFirestore.getInstance()
+                    firestore?.collection(mail)?.document(document)
+                        ?.set(todo)?.addOnCompleteListener { task->
+                            if(task.isSuccessful){
+                                Toast.makeText(this, "회원가입 성공. 환영합니다.", Toast.LENGTH_LONG).show()
+                            }else{
+                                Toast.makeText(this, task.exception?.message, Toast.LENGTH_LONG).show()
+                            }
+                        }
                 }else{
                     Toast.makeText(this, "회원가입에 실패했습니다. 메일 주소를 확인해주세요.", Toast.LENGTH_LONG).show()
                 }
