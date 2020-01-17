@@ -20,7 +20,8 @@
             android:layout_marginTop="35dp"
             android:text="화요일"
             android:textSize="36sp"
-            app:fontFamily="@font/gothic13"
+            android:textColor="@color/navy"
+            app:fontFamily="@font/symphony"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -62,9 +63,11 @@
             android:layout_marginTop="15dp"
             android:background="@drawable/search"
             android:ems="10"
-            android:hint="    할 일을 추가해주세요."
+            android:hint="할 일을 추가해주세요."
             android:inputType="textPersonName"
             android:textSize="14sp"
+            android:drawablePadding="15dp"
+            android:paddingLeft="18dp"
             app:fontFamily="@font/gothic11"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

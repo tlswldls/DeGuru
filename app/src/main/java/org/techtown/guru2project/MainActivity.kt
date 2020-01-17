@@ -51,6 +51,13 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        if(intent.hasExtra("mail")){
+            val email = intent.getStringExtra("mail")
+            Toast.makeText(this, "환영합니다"+email+"님", Toast.LENGTH_LONG).show()
+        }else{
+            Toast.makeText(this, "로그인 정보를 가져오기에 실패했습니다.", Toast.LENGTH_LONG).show()
+        }
+
         meueBrn_main2.setOnClickListener {
             val intent = Intent(this, MenuActivity::class.java)
             startActivityForResult(intent, REQUEST_CODE)

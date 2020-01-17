@@ -25,10 +25,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="오\n늘\n할\n일"
-                android:textSize="40sp"
-                android:textColor="@color/navy"
                 android:lineSpacingExtra="10dp"
+                android:text="아\n｜\n맞\n다"
+                android:textColor="@color/navy"
+                android:textSize="40sp"
                 app:fontFamily="@font/symphony" />
 
             <TextView
@@ -56,9 +56,10 @@
             android:layout_marginTop="40dp"
             android:background="@drawable/editbox"
             android:ems="10"
-            android:hint="    이메일"
+            android:hint="이메일"
             android:inputType="textEmailAddress"
             android:textSize="14sp"
+            android:paddingLeft="18dp"
             app:fontFamily="@font/gothic11"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -70,9 +71,10 @@
             android:layout_marginTop="21dp"
             android:background="@drawable/editbox"
             android:ems="10"
-            android:hint="    패스워드"
+            android:hint=" 패스워드"
             android:inputType="textPassword"
             android:textSize="14sp"
+            android:paddingLeft="18dp"
             app:fontFamily="@font/gothic11"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/emailEdit_login" />
