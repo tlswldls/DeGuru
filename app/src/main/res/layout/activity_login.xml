@@ -16,7 +16,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="35dp"
             android:orientation="vertical"
             app:layout_constraintTop_toTopOf="parent">
 
@@ -28,6 +28,7 @@
                 android:text="오\n늘\n할\n일"
                 android:textSize="40sp"
                 android:textColor="@color/navy"
+                android:lineSpacingExtra="10dp"
                 app:fontFamily="@font/symphony" />
 
             <TextView
@@ -66,7 +67,7 @@
             android:id="@+id/pwEdit_login"
             android:layout_width="320dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="100dp"
+            android:layout_marginTop="21dp"
             android:background="@drawable/editbox"
             android:ems="10"
             android:hint="    패스워드"
@@ -74,17 +75,17 @@
             android:textSize="14sp"
             app:fontFamily="@font/gothic11"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/emailEdit_login" />
 
         <ImageButton
             android:id="@+id/loginBtn_login"
             android:layout_width="320dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="160dp"
+            android:layout_marginTop="21dp"
             android:background="@drawable/btn"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/pwEdit_login"
             app:srcCompat="@drawable/alphabtn" />
 
         <TextView
@@ -92,12 +93,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="140dp"
+            android:layout_marginTop="12dp"
             android:layout_marginBottom="12dp"
             android:text="로그인"
             android:textColor="#FFFFFF"
             app:fontFamily="@font/gothic12"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/loginBtn_login" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
