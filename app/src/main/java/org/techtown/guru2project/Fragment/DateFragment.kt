@@ -6,11 +6,15 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import org.techtown.guru2project.R
+import java.util.*
 
 /**
  * A simple [Fragment] subclass.
  */
 class DateFragment : Fragment() {
+
+    // Initialize a new calendar instance
+    val calendar = Calendar.getInstance()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

@@ -10,6 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".LoginActivity">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -17,7 +18,7 @@
             </intent-filter>
 
         </activity>
-        <activity android:name=".SettingActivity" />
+        <activity android:name=".SettingActivity"/>
         <activity android:name=".MenuActivity" />
         <activity android:name=".JoinActivity" />
         <activity android:name=".MainActivity">
