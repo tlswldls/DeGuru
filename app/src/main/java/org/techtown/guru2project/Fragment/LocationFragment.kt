@@ -36,6 +36,13 @@ import javax.xml.parsers.DocumentBuilderFactory
 
 private const val REQUEST_ACCESS_FINE_LOCATION = 1000
 
+var myLatitude = 0.0
+var myLongitude = 0.0
+var targetLatitude = 0.0
+var targetLongitude = 0.0
+var diffLatitude = 0.0
+var diffLongitude = 0.0
+
 class LocationFragment : Fragment(), OnMapReadyCallback{
     val serviceKey = "nynKQpN7ybxaSAstA9pWvReQOXQ9pP9ENPUKE%2BmoT%2BOCmvTMUtMhFQNoosQ9sMNvRMGK43nNWoTIcdDFZkUHkg%3D%3D"
     private lateinit var mMap: GoogleMap    // 1
@@ -62,8 +69,14 @@ class LocationFragment : Fragment(), OnMapReadyCallback{
                 }catch(e: Exception){
                     resultTxt.text = e.message
                 }
-
             }
+            diffLatitude = LatitudeInDifference(300)
+            diffLongitude = LongitudeInDifference(targetLatitude, 300)
+
+            viewLat.setText("${targetLatitude-diffLatitude} ~ ${targetLatitude+diffLatitude}")
+            viewLong.setText("${myLongitude-diffLongitude} ~ ${myLongitude+diffLongitude}")
+
+            calculation()
         }
         /* 나의 현재 위도, 경도 가져오는 코드*/
         locationInit()
@@ -165,7 +178,9 @@ class LocationFragment : Fragment(), OnMapReadyCallback{
                 }
 
                 for(n in 0 until positions.size){
-                        result = result+"["+positions[n][0]+", "+positions[n][1]+"] "
+                    result = result+"["+positions[n][0]+", "+positions[n][1]+"] "
+                    targetLatitude = positions[n][1].toDouble()
+                    targetLongitude = positions[n][0].toDouble()
                 }
                 lanch2.countDown()
                     //resultTxt.text = result
@@ -239,7 +254,6 @@ class LocationFragment : Fragment(), OnMapReadyCallback{
 
     // 위치 정보를 얻기 위한 각종 초기화
     private fun locationInit() {
-        Log.e("c", "도착했습니다")
         fusedLocationProviderClient = FusedLocationProviderClient(activity!!)
 
         locationCallback = MyLocationCallBack()
@@ -378,9 +392,39 @@ class LocationFragment : Fragment(), OnMapReadyCallback{
                 //mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 17f))
 
                 textView2.text = "나의 위도: $latitude, 나의 경도: $longitude"
+                myLatitude = latitude
+                myLongitude = longitude
             }
 
         }
+    }
+
+    // 반경 m 이내의 latitude, longitude degree 차이 계산
+    // 반경 m이내의 latitude degree 차이
+    public fun LatitudeInDifference(diff: Int): Double {
+        val earthRadius: Int = 6371000 // 지구의 반지름. 단위 m
+        return (diff*360.0) / (2*Math.PI*earthRadius)
+    }
+
+    // 반경 m이내의 longitude degree 차이
+    public fun LongitudeInDifference(latitude:Double, diff:Int): Double{
+        val earthRadius: Int = 6371000 // 지구의 반지름. 단위 m
+        var result:Double = (diff*360.0)/(2*Math.PI*earthRadius*Math.cos(Math.toRadians(latitude)))
+
+        return (result)
+    }
+
+    // 실시간으로 내가 반경 안에 있는지 확인
+    private fun calculation(){
+        if ((targetLatitude- diffLatitude)<= myLatitude
+            && myLatitude <= (targetLatitude+ diffLatitude)
+            && (targetLongitude- diffLongitude) <= myLongitude
+            && myLongitude<=(targetLongitude+ diffLongitude)){
+            Toast.makeText(context, "target 가까이에 왔습니다.", Toast.LENGTH_LONG).show()
+        } else{
+            Toast.makeText(context, "target 반경 내에 있지 않습니다.", Toast.LENGTH_LONG).show()
+        }
+
     }
 }
 
