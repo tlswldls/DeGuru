@@ -16,7 +16,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="35dp"
             android:orientation="vertical"
             app:layout_constraintTop_toTopOf="parent">
 
@@ -28,6 +28,7 @@
                 android:text="오\n늘\n할\n일"
                 android:textSize="40sp"
                 android:textColor="#14415E"
+                android:lineSpacingExtra ="10dp"
                 app:fontFamily="@font/symphony" />
 
             <TextView
@@ -52,7 +53,7 @@
             android:id="@+id/emailEdit_join"
             android:layout_width="320dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="60dp"
+            android:layout_marginTop="15dp"
             android:background="@drawable/editbox"
             android:ems="10"
             android:hint="    이메일"
@@ -66,7 +67,7 @@
             android:id="@+id/pwEdit_join"
             android:layout_width="320dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="115dp"
+            android:layout_marginTop="16dp"
             android:background="@drawable/editbox"
             android:ems="10"
             android:hint="    패스워드"
@@ -74,13 +75,13 @@
             android:textSize="14sp"
             app:fontFamily="@font/gothic11"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/emailEdit_join" />
 
         <EditText
             android:id="@+id/editText"
             android:layout_width="320dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="170dp"
+            android:layout_marginTop="16dp"
             android:background="@drawable/editbox"
             android:ems="10"
             android:hint="    패스워드 확인"
@@ -88,27 +89,15 @@
             android:textSize="14sp"
             app:fontFamily="@font/gothic11"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/pwEdit_join" />
 
-        <EditText
-            android:id="@+id/userEdit_join"
-            android:layout_width="320dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:background="@drawable/editbox"
-            android:ems="10"
-            android:hint="    사용자 이름"
-            android:inputType="textPersonName"
-            android:textSize="14sp"
-            app:fontFamily="@font/gothic11"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+
 
         <ImageButton
             android:id="@+id/joinBtn_join"
             android:layout_width="320dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="16dp"
             android:background="@drawable/btn"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -121,7 +110,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="132dp"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="19dp"
             android:text="회원가입"
             android:textColor="#FFFFFF"
             app:fontFamily="@font/gothic12"
