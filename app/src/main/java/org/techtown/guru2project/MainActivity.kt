@@ -18,7 +18,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        meueBrn_main.setOnClickListener{
+        meueBrn_main2.setOnClickListener{
             val intent = Intent(this, MenuActivity::class.java)
             startActivityForResult(intent, REQUEST_CODE)
         }

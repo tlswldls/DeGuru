@@ -13,40 +13,42 @@
         android:layout_width="370dp"
         android:layout_height="wrap_content">
 
-        <LinearLayout
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/dayText_main"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="35dp"
-            android:orientation="horizontal"
-            app:layout_constraintTop_toTopOf="parent">
+            android:text="화요일"
+            android:textSize="36sp"
+            app:fontFamily="@font/gothic13"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
-                android:id="@+id/dayText_main"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="화요일"
-                android:textSize="36sp"
-                app:fontFamily="@font/gothic13" />
+        <TextView
+            android:id="@+id/dateText_main2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_weight="0"
+            android:text="01.14"
+            android:textSize="18sp"
+            app:fontFamily="@font/gothic11"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/dayText_main" />
 
-            <TextView
-                android:id="@+id/dateText_main"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="  01.14"
-                android:textSize="18sp"
-                app:fontFamily="@font/gothic11"/>
+        <ImageButton
+            android:id="@+id/meueBrn_main2"
+            android:layout_width="42dp"
+            android:layout_height="42dp"
+            android:layout_marginStart="182dp"
+            android:background="@drawable/alphabtn"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/dateText_main2"
+            app:srcCompat="@drawable/menu_icon" />
 
-            <ImageButton
-                android:id="@+id/meueBrn_main"
-                android:layout_width="42dp"
-                android:layout_height="42dp"
-                android:layout_gravity="center|right"
-                android:contentDescription="TODO"
-                android:background="@drawable/alphabtn"
-                tools:srcCompat="@drawable/menu_icon" />
 
-        </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -78,16 +80,6 @@
             app:layout_constraintTop_toTopOf="parent"
             app:fontFamily="@font/gothic12"/>
 
-        <ImageButton
-            android:id="@+id/imageButton"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_marginTop="15dp"
-            android:background="@drawable/alphabtn"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:srcCompat="@drawable/addbtn" />
-
         <ImageView
             android:id="@+id/imageView"
             android:layout_width="370dp"
@@ -98,6 +90,18 @@
             app:layout_constraintTop_toBottomOf="@+id/editText_main"
             app:srcCompat="@drawable/btn"
             tools:srcCompat="@drawable/alphabtn" />
+
+        <ImageButton
+            android:id="@+id/imageButton"
+            android:layout_width="29dp"
+            android:layout_height="29dp"
+            android:background="@drawable/alphabtn"
+            app:layout_constraintBottom_toBottomOf="@+id/editText_main"
+            app:layout_constraintEnd_toEndOf="@+id/editText_main"
+            app:layout_constraintTop_toTopOf="@+id/editText_main"
+            app:srcCompat="@drawable/addbtn" />
+
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -115,7 +119,7 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"  />
-            android:layout_height="match_parent" />
+
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
