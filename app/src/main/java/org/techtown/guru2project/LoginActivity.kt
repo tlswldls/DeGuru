@@ -28,7 +28,10 @@ class LoginActivity : AppCompatActivity() {
 
         //로그인 버튼
         loginBtn_login.setOnClickListener {
+            val intent = Intent(this, MainActivity::class.java)
+            intent.putExtra("mail", emailEdit_login.text.toString())
             emailLogin()
+            startActivity(intent)
         }
     }
 
@@ -46,8 +49,6 @@ class LoginActivity : AppCompatActivity() {
             ?.addOnCompleteListener { task ->
                 if(task.isSuccessful){
                     saveLogInData()
-                    val intent2 = Intent(this, MainActivity::class.java)
-                    startActivity(intent2)
                 }else{
                     Toast.makeText(this, task.exception?.message, Toast.LENGTH_LONG).show()
                     pwEdit_login.setText("")
