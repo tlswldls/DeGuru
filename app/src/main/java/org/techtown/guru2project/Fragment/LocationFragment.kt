@@ -4,15 +4,17 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationRequest
+import com.google.android.gms.maps.GoogleMap
 import kotlinx.android.synthetic.main.fragment_location.*
-import okhttp3.*
 import okhttp3.HttpUrl.Companion.toHttpUrlOrNull
+import okhttp3.OkHttpClient
+import okhttp3.Request
 import org.techtown.guru2project.R
 import org.w3c.dom.Element
 import java.io.IOException
-import java.lang.Exception
 import java.util.concurrent.CountDownLatch
 import javax.xml.parsers.DocumentBuilderFactory
 
@@ -20,8 +22,11 @@ import javax.xml.parsers.DocumentBuilderFactory
 /**
  * A simple [Fragment] subclass.
  */
+
+private const val REQUEST_ACCESS_FINE_LOCATION = 1000
+
 class LocationFragment : Fragment() {
-    val serviceKey = "nynKQpN7ybxaSAstA9pWvReQOXQ9pP9ENPUKE%2BmoT%2BOCmvTMUtMhFQNoosQ9sMNvRMGK43nNWoTIcdDFZkUHkg%3D%3D"
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -211,5 +216,7 @@ class LocationFragment : Fragment() {
         val position = arrayOf(xPos,yPos)
         return position
     }
+
+    /* 나의 GPS 받아오기 */
 
 }
