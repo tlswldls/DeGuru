@@ -8,14 +8,13 @@ import android.os.PersistableBundle
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
-
     companion object {
         val REQUEST_CODE = 0
         val RESULT = "result"
-        val NAME = "name"
         val EMAIL = "email"
         val PW = "password"
         val REQUEST_CODE_MENU = 1000
@@ -26,31 +25,32 @@ class MainActivity : AppCompatActivity() {
         val RESULT_LONG = "LONGITUDE"
         val RESULT_INDEX = "INDEX"
     }
+    private var firestore:FirebaseFirestore? = null
+    var email:String = "User"
 
     private lateinit var adapter: TodoAdapter
     private val todoList = arrayListOf<Todo>(
         Todo(
             "위도, 경도 받아오기", "2020.01.17", "태능약국",
-            "37.619087", "127.07819", "pinkindex"
+            "37.619087", "127.07819", "서울시 노원구", "pinkindex"
         ),
         Todo(
             "RecyclerView 완성하기", "2020.01.17", "태능약국",
-            "37.619087", "127.07819", "pinkindex"
+            "37.619087", "127.07819", "경기도 부천시", "pinkindex"
         ),
         Todo(
             "firebase랑 연결하기", "2020.01.17", "태능약국",
-            "37.619087", "127.07819", "pinkindex"
+            "37.619087", "127.07819", "경기도 남양주시", "pinkindex"
         ),
         Todo(
             "구루 이새끼 넘 힘들다", "2020.01.17", "태능약국",
-            "37.619087", "127.07819", "greenindex"
+            "37.619087", "127.07819", "서울시 노원구", "pinkindex"
         )
     )
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        var email:String = ""
 
         if(intent.hasExtra("mail")){
             email = intent.getStringExtra("mail")
@@ -66,8 +66,13 @@ class MainActivity : AppCompatActivity() {
         }
 
         imageButton.setOnClickListener {
-            val intent = Intent(this, SettingActivity::class.java)
-            startActivity(intent)
+            if(!editText_main.text.isNullOrEmpty()){
+                val intent = Intent(this, SettingActivity::class.java)
+                intent.putExtra("todo", editText_main.text.toString())
+                startActivity(intent)
+            }else{
+                Toast.makeText(this, "할 일을 추가해 주세요.", Toast.LENGTH_LONG).show()
+            }
         }
 
         RecyclerView.layoutManager = LinearLayoutManager(this)
@@ -88,6 +93,12 @@ class MainActivity : AppCompatActivity() {
             finish()
         }
         super.onActivityResult(requestCode, resultCode, data)
+    }
+
+    private fun createNewDoc(name:String){
+        val document = name
+
+        firestore = FirebaseFirestore.getInstance()
     }
 
 }
