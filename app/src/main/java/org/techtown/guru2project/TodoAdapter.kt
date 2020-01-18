@@ -39,12 +39,6 @@ class TodoAdapter (val context: Context, val itemCheck: (Todo) -> Unit)
         items.add(item)
     }
 
-//    fun setLine(item: Todo){
-//        val mBSpannalbeString = item.todo
-//        val mASpannalbeString = SpannableString(mBSpannalbeString)
-//        mASpannalbeString.setSpan(org.techtown.guru2project.mStrikeThrough, 52, 66, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
-//    }
-
     inner class ViewHolder(itemView: View, itemCheck: (Todo) -> Unit) :
         RecyclerView.ViewHolder(itemView) {
         fun setItem(item: Todo) {
