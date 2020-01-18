@@ -5,7 +5,6 @@ import android.content.Intent
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_login.*
@@ -28,10 +27,7 @@ class LoginActivity : AppCompatActivity() {
 
         //로그인 버튼
         loginBtn_login.setOnClickListener {
-            val intent = Intent(this, MainActivity::class.java)
-            intent.putExtra("mail", emailEdit_login.text.toString())
             emailLogin()
-            startActivity(intent)
         }
     }
 
@@ -48,6 +44,9 @@ class LoginActivity : AppCompatActivity() {
         auth?.signInWithEmailAndPassword(emailEdit_login.text.toString(), pwEdit_login.text.toString())
             ?.addOnCompleteListener { task ->
                 if(task.isSuccessful){
+                    val intent = Intent(this, MainActivity::class.java)
+                    intent.putExtra("mail", emailEdit_login.text.toString())
+                    startActivity(intent)
                     saveLogInData()
                 }else{
                     Toast.makeText(this, task.exception?.message, Toast.LENGTH_LONG).show()
