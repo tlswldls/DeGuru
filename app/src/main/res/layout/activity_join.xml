@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@drawable/background_login"
+    android:background="@drawable/background"
     app:layout_anchorGravity="center">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -18,6 +18,9 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="35dp"
             android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
             <TextView
@@ -26,8 +29,8 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:text="아\n｜\n맞\n다"
-                android:textSize="40sp"
                 android:textColor="#14415E"
+                android:textSize="40sp"
                 android:lineSpacingExtra ="10dp"
                 app:fontFamily="@font/symphony" />
 
@@ -62,6 +65,7 @@
             android:textSize="14sp"
             android:width="320dp"
             app:fontFamily="@font/gothic11"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -74,9 +78,10 @@
             android:ems="10"
             android:hint="패스워드"
             android:inputType="textPassword"
-            android:textSize="14sp"
             android:paddingLeft="18dp"
+            android:textSize="14sp"
             app:fontFamily="@font/gothic11"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/emailEdit_join" />
 
@@ -89,9 +94,10 @@
             android:ems="10"
             android:hint="패스워드 확인"
             android:inputType="textPassword"
-            android:textSize="14sp"
             android:paddingLeft="18dp"
+            android:textSize="14sp"
             app:fontFamily="@font/gothic11"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/pwEdit_join" />
 
@@ -104,8 +110,11 @@
             android:layout_marginTop="16dp"
             android:background="@drawable/btn"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/editText"
+            app:layout_constraintVertical_bias="0.0"
             app:srcCompat="@drawable/alphabtn"
             tools:srcCompat="@drawable/alphabtn" />
 
@@ -113,15 +122,13 @@
             android:id="@+id/joinText2_join"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="132dp"
-            android:layout_marginTop="19dp"
             android:text="회원가입"
             android:textColor="#FFFFFF"
             app:fontFamily="@font/gothic12"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editText"
-            app:layout_constraintVertical_bias="0.36" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/joinBtn_join"
+            app:layout_constraintTop_toTopOf="@+id/joinBtn_join" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -134,10 +141,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginStart="132dp"
             android:layout_marginTop="32dp"
             android:text="이미 계정이 있으신가요?"
             app:fontFamily="@font/gothic11"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -145,24 +152,22 @@
             android:id="@+id/loginText_join"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="189dp"
-            android:layout_marginTop="55dp"
-            android:layout_marginBottom="100dp"
             android:text="로그인"
             app:fontFamily="@font/gothic13"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/orText_join" />
+            app:layout_constraintBottom_toBottomOf="@+id/loginBtn_join"
+            app:layout_constraintEnd_toEndOf="@+id/loginBtn_join"
+            app:layout_constraintStart_toStartOf="@+id/loginBtn_join"
+            app:layout_constraintTop_toTopOf="@+id/loginBtn_join" />
 
         <ImageButton
             android:id="@+id/loginBtn_join"
             android:layout_width="65dp"
             android:layout_height="41dp"
-            android:layout_marginStart="176dp"
             android:layout_marginTop="45dp"
             android:layout_marginBottom="84dp"
             android:background="@drawable/alphabtn"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/orText_join"
             app:srcCompat="@drawable/alphabtn" />

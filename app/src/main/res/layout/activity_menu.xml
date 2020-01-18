@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:gravity="center"
     android:orientation="vertical"
-    android:background="@drawable/background_menu"
+    android:background="@color/backgroundColor"
     tools:context=".MainActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -19,6 +19,7 @@
             android:layout_height="42dp"
             android:layout_marginTop="35dp"
             android:background="@drawable/alphabtn"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/backbtn" />
@@ -29,10 +30,14 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="35dp"
+            android:layout_marginEnd="151dp"
+            android:layout_marginBottom="1dp"
             android:text="계정 정보"
             android:textColor="@color/navy"
             android:textSize="36sp"
             app:fontFamily="@font/symphony"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/backBtn_menu"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -47,11 +52,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="130dp"
+            android:layout_marginEnd="230dp"
             android:text="사용자 이메일 값"
             android:textSize="18sp"
+            app:fontFamily="@font/gothic12"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:fontFamily="@font/gothic12"/>
+            app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
             android:id="@+id/barImg1_menu"
@@ -59,6 +66,8 @@
             android:layout_height="2dp"
             android:layout_marginTop="4dp"
             android:background="@drawable/editbox"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/useridText_menu"
             app:srcCompat="@android:drawable/bottom_bar"
@@ -80,21 +89,21 @@
                 android:id="@+id/logoutText_menu"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="172dp"
-                android:layout_marginTop="152dp"
                 android:text="로그아웃"
                 android:textSize="20dp"
                 app:fontFamily="@font/gothic13"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintBottom_toBottomOf="@+id/logoutBtn_menu"
+                app:layout_constraintEnd_toEndOf="@+id/logoutBtn_menu"
+                app:layout_constraintStart_toStartOf="@+id/logoutBtn_menu"
+                app:layout_constraintTop_toTopOf="@+id/logoutBtn_menu" />
 
             <ImageButton
                 android:id="@+id/logoutBtn_menu"
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="131dp"
                 android:layout_marginTop="140dp"
                 android:background="@drawable/alphabtn"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:srcCompat="@drawable/alphabtn" />
@@ -103,26 +112,25 @@
                 android:id="@+id/deleteText_menu"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="168dp"
-                android:layout_marginTop="8dp"
                 android:text="계정삭제"
                 android:textColor="@color/colorAccent"
                 android:textSize="20sp"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toBottomOf="@+id/deleteBtn_menu"
+                app:layout_constraintEnd_toEndOf="@+id/deleteBtn_menu"
+                app:layout_constraintStart_toStartOf="@+id/deleteBtn_menu"
                 app:layout_constraintTop_toTopOf="@+id/deleteBtn_menu" />
 
             <ImageButton
                 android:id="@+id/deleteBtn_menu"
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="131dp"
                 android:layout_marginBottom="141dp"
                 android:background="@drawable/alphabtn"
                 app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/logoutBtn_menu"
-                app:srcCompat="@android:drawable/arrow_up_float"
-                tools:srcCompat="@drawable/alphabtn" />
+                app:srcCompat="@drawable/alphabtn" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </LinearLayout>
