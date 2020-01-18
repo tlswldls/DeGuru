@@ -132,12 +132,14 @@
             android:id="@+id/joinText_login"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="75dp"
+            android:layout_marginBottom="130dp"
             android:text="회원가입"
             app:fontFamily="@font/gothic13"
-            app:layout_constraintBottom_toBottomOf="@+id/joingBtn"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/joingBtn"
             app:layout_constraintStart_toStartOf="@+id/joingBtn"
-            app:layout_constraintTop_toTopOf="@+id/joingBtn" />
+            app:layout_constraintTop_toBottomOf="@+id/orText_login" />
 
         <ImageButton
             android:id="@+id/joingBtn"
