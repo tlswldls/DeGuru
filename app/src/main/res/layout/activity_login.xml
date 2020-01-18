@@ -115,10 +115,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginStart="193dp"
             android:layout_marginTop="45dp"
             android:text="또는"
             app:fontFamily="@font/gothic12"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -126,24 +126,24 @@
             android:id="@+id/joinText_login"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="180dp"
             android:layout_marginTop="75dp"
             android:layout_marginBottom="130dp"
             android:text="회원가입"
             app:fontFamily="@font/gothic13"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/joingBtn"
+            app:layout_constraintStart_toStartOf="@+id/joingBtn"
             app:layout_constraintTop_toBottomOf="@+id/orText_login" />
 
         <ImageButton
             android:id="@+id/joingBtn"
             android:layout_width="75dp"
             android:layout_height="35dp"
-            android:layout_marginStart="168dp"
             android:layout_marginTop="83dp"
             android:layout_marginBottom="124dp"
             android:background="@drawable/alphabtn"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/orText_login"
             app:srcCompat="@drawable/alphabtn" />
