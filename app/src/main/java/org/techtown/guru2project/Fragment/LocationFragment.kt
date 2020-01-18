@@ -11,6 +11,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationCallback
@@ -23,7 +24,9 @@ import kotlinx.android.synthetic.main.fragment_location.*
 import okhttp3.HttpUrl.Companion.toHttpUrlOrNull
 import okhttp3.OkHttpClient
 import okhttp3.Request
+import org.jetbrains.anko.email
 import org.techtown.guru2project.R
+import org.techtown.guru2project.SettingActivity
 import org.w3c.dom.Element
 import java.io.IOException
 import java.util.concurrent.CountDownLatch
@@ -49,6 +52,7 @@ class LocationFragment : Fragment(), OnMapReadyCallback{
     private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
     private lateinit var locationRequest: LocationRequest
     private lateinit var locationCallback: MyLocationCallBack
+    val email = (activity as SettingActivity).getEmail()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -195,6 +199,8 @@ class LocationFragment : Fragment(), OnMapReadyCallback{
         })
         lanch2.await()
 
+        //DB에 위치 정보를 업데이트
+
         //위도 경도 넘겨주기
         return result
 
@@ -244,13 +250,13 @@ class LocationFragment : Fragment(), OnMapReadyCallback{
         return element.getElementsByTagName(key).item(0).firstChild.nodeValue
     }
 
+    //위도 경도 데이터를 숫자 배열로 변경
     private fun toNum(x:String, y:String): Array<Float>{
         val xPos = x.toFloat()
         val yPos = y.toFloat()
         val position = arrayOf(xPos,yPos)
         return position
     }
-
 
     // 위치 정보를 얻기 위한 각종 초기화
     private fun locationInit() {
