@@ -73,11 +73,6 @@ class MainActivity : AppCompatActivity() {
             Toast.makeText(this, "로그인 정보를 가져오기에 실패했습니다.", Toast.LENGTH_LONG).show()
         }
 
-//        fun setSpan(spannableString: String){
-//            spannableString = SpannableString(item.toString())
-//            mBSpannableString.setSpan(org.techtown.guru2project.mStrikeThrough, 52, 66, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
-//        }
-
         meueBrn_main2.setOnClickListener {
             val intent = Intent(this, MenuActivity::class.java)
             intent.putExtra("mail", email)

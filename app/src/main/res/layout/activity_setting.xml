@@ -19,6 +19,7 @@
             android:layout_height="42dp"
             android:layout_marginTop="35dp"
             android:background="@drawable/alphabtn"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/backbtn" />
@@ -29,10 +30,14 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="35dp"
+            android:layout_marginEnd="161dp"
+            android:layout_marginBottom="1dp"
             android:text="일정추가"
-            android:textSize="36sp"
             android:textColor="@color/navy"
+            android:textSize="36sp"
             app:fontFamily="@font/symphony"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/backBtn_menu"
             app:layout_constraintTop_toTopOf="parent" />
 
