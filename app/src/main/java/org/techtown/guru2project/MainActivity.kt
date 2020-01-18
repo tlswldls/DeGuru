@@ -34,19 +34,19 @@ class MainActivity : AppCompatActivity() {
     private var todoList = arrayListOf<Todo>(
         Todo(
             "위도, 경도 받아오기", "2020.01.17", "태능약국",
-            "37.619087", "127.07819", "서울시 노원구", "pinkindex"
+            "37.619087", "127.07819", "서울시 노원구", "pinkindex", false
         ),
         Todo(
             "RecyclerView 완성하기", "2020.01.17", "태능약국",
-            "37.619087", "127.07819", "경기도 부천시", "pinkindex"
+            "37.619087", "127.07819", "경기도 부천시", "pinkindex", false
         ),
         Todo(
             "firebase랑 연결하기", "2020.01.17", "태능약국",
-            "37.619087", "127.07819", "경기도 남양주시", "pinkindex"
+            "37.619087", "127.07819", "경기도 남양주시", "pinkindex", false
         ),
         Todo(
             "구루 이새끼 넘 힘들다", "2020.01.17", "태능약국",
-            "37.619087", "127.07819", "서울시 노원구", "pinkindex"
+            "37.619087", "127.07819", "서울시 노원구", "pinkindex", false
         )
     )
 
@@ -88,6 +88,7 @@ class MainActivity : AppCompatActivity() {
             if(!editText_main.text.isNullOrEmpty()){
                 val intent = Intent(this, SettingActivity::class.java)
                 intent.putExtra("todo", editText_main.text.toString())
+                intent.putExtra("mail", email)
                 startActivity(intent)
             }else{
                 Toast.makeText(this, "할 일을 추가해 주세요.", Toast.LENGTH_LONG).show()
