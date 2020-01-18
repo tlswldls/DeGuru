@@ -48,7 +48,7 @@ class TodoAdapter (val context: Context, val itemCheck: (Todo) -> Unit)
                 context.packageName
             )
             if (resourceId in 0..1) {
-                itemView.imageView?.setImageResource(R.drawable.pinkindex)
+                itemView.imageView?.setImageResource(R.drawable.indexbar1)
             }
             else {
                 itemView.imageView?.setImageResource(resourceId)
