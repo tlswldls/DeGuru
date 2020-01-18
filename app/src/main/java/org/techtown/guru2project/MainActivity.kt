@@ -1,16 +1,13 @@
 package org.techtown.guru2project
 
-import android.app.Activity
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.PersistableBundle
+import android.text.style.StrikethroughSpan
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_main.*
-import java.text.SimpleDateFormat
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import java.util.*
@@ -31,9 +28,10 @@ class MainActivity : AppCompatActivity() {
     }
     private var firestore:FirebaseFirestore? = null
     var email:String = "User"
+    val mStrikeThrough = StrikethroughSpan()
 
     private lateinit var adapter: TodoAdapter
-    private val todoList = arrayListOf<Todo>(
+    private var todoList = arrayListOf<Todo>(
         Todo(
             "위도, 경도 받아오기", "2020.01.17", "태능약국",
             "37.619087", "127.07819", "서울시 노원구", "pinkindex"
@@ -56,7 +54,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        // 요일, 날짜 설정
+        /* 요일, 날짜 설정 */
         val current = LocalDateTime.now()
         val formatterDate = DateTimeFormatter.ofPattern("MM.dd", Locale.KOREA)
         val formattedDate= current.format(formatterDate)
@@ -67,13 +65,18 @@ class MainActivity : AppCompatActivity() {
         dateText_main2.text = formattedDate
 
 
-
+        /* 로그인 정보 가져오기 */
         if(intent.hasExtra("mail")){
             email = intent.getStringExtra("mail")
             Toast.makeText(this, "환영합니다"+email+"님", Toast.LENGTH_LONG).show()
         }else{
             Toast.makeText(this, "로그인 정보를 가져오기에 실패했습니다.", Toast.LENGTH_LONG).show()
         }
+
+//        fun setSpan(spannableString: String){
+//            spannableString = SpannableString(item.toString())
+//            mBSpannableString.setSpan(org.techtown.guru2project.mStrikeThrough, 52, 66, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+//        }
 
         meueBrn_main2.setOnClickListener {
             val intent = Intent(this, MenuActivity::class.java)
@@ -93,7 +96,7 @@ class MainActivity : AppCompatActivity() {
 
         RecyclerView.layoutManager = LinearLayoutManager(this)
         adapter = TodoAdapter(this) {
-            Toast.makeText(this, "Todo: ${it.todo}, Date: ${it.date}", Toast.LENGTH_SHORT).show()
+            //Toast.makeText(this, "Todo: ${it.todo}, Date: ${it.date}", Toast.LENGTH_SHORT).show()
         }
         adapter.setItems(todoList)
         RecyclerView.adapter = adapter

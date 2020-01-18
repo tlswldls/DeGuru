@@ -1,13 +1,15 @@
 package org.techtown.guru2project
 
 import android.content.Context
+import android.text.SpannableString
+import android.text.Spanned
+import android.text.style.StrikethroughSpan
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.todo_item.view.*
-import org.techtown.guru2project.R
-import java.util.ArrayList
+import java.util.*
 
 class TodoAdapter (val context: Context, val itemCheck: (Todo) -> Unit)
     : RecyclerView.Adapter<TodoAdapter.ViewHolder>() {
@@ -37,6 +39,12 @@ class TodoAdapter (val context: Context, val itemCheck: (Todo) -> Unit)
         items.add(item)
     }
 
+//    fun setLine(item: Todo){
+//        val mBSpannalbeString = item.todo
+//        val mASpannalbeString = SpannableString(mBSpannalbeString)
+//        mASpannalbeString.setSpan(org.techtown.guru2project.mStrikeThrough, 52, 66, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+//    }
+
     inner class ViewHolder(itemView: View, itemCheck: (Todo) -> Unit) :
         RecyclerView.ViewHolder(itemView) {
         fun setItem(item: Todo) {
@@ -51,8 +59,23 @@ class TodoAdapter (val context: Context, val itemCheck: (Todo) -> Unit)
             else {
                 itemView.imageView?.setImageResource(resourceId)
             }
+            var isStriked: Boolean = false
             itemView.tvTodo.text = item.todo
-            itemView.setOnClickListener() { itemCheck(item) }
+            itemView.setOnClickListener(){
+                // 할 일 완료 후 취소선 넣기
+                var length: Int = item.todo.length
+                var SS: SpannableString = SpannableString(item.todo)
+                if(isStriked == false) {
+                    SS.setSpan(StrikethroughSpan(), 0, length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+                    itemView.tvTodo.text = SS
+                    isStriked = true
+                }
+                else if(isStriked == true) {
+                    SS.removeSpan(StrikethroughSpan())
+                    itemView.tvTodo.text = SS
+                    isStriked = false
+                }
+            }
         }
     }
 }
