@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "120191871528-92klkmip9n9bvjl1hgaqhtdmd5jf0ich.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "org.techtown.guru2project",
+            "certificate_hash": "87c437255329f19bb92c18374cf8900579cd6398"
+          }
+        },
+        {
           "client_id": "120191871528-j1veei3dk3l70v6g255kmr7fct5vq4q7.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {

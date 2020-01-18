@@ -39,12 +39,6 @@ class TodoAdapter (val context: Context, val itemCheck: (Todo) -> Unit)
         items.add(item)
     }
 
-//    fun setLine(item: Todo){
-//        val mBSpannalbeString = item.todo
-//        val mASpannalbeString = SpannableString(mBSpannalbeString)
-//        mASpannalbeString.setSpan(org.techtown.guru2project.mStrikeThrough, 52, 66, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
-//    }
-
     inner class ViewHolder(itemView: View, itemCheck: (Todo) -> Unit) :
         RecyclerView.ViewHolder(itemView) {
         fun setItem(item: Todo) {
@@ -62,8 +56,9 @@ class TodoAdapter (val context: Context, val itemCheck: (Todo) -> Unit)
             var isStriked: Boolean = false
             itemView.tvTodo.text = item.todo
             itemView.setOnClickListener(){
+//                itemCheck(item)
                 // 할 일 완료 후 취소선 넣기
-                var length: Int = item.todo.length
+                var length: Int = item.todo!!.length
                 var SS: SpannableString = SpannableString(item.todo)
                 if(isStriked == false) {
                     SS.setSpan(StrikethroughSpan(), 0, length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)

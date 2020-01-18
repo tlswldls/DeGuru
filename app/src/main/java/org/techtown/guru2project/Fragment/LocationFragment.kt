@@ -52,7 +52,7 @@ class LocationFragment : Fragment(), OnMapReadyCallback{
     private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
     private lateinit var locationRequest: LocationRequest
     private lateinit var locationCallback: MyLocationCallBack
-    val email = (activity as SettingActivity).getEmail()
+    //val email = (activity as SettingActivity).getEmail()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
