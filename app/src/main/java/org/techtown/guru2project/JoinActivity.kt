@@ -6,7 +6,6 @@ import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_join.*
-import org.jetbrains.anko.email
 
 class JoinActivity : AppCompatActivity() {
     private var auth: FirebaseAuth? = null
@@ -39,23 +38,30 @@ class JoinActivity : AppCompatActivity() {
             return
         }
 
-        val mail = emailEdit_join.text.toString()
-        auth?.createUserWithEmailAndPassword(emailEdit_join.text.toString(), pwEdit_join.text.toString())
+        val emailTxt = emailEdit_join.text.toString()
+        val pw = pwEdit_join.text.toString()
+        auth?.createUserWithEmailAndPassword(emailTxt, pw)
             ?.addOnCompleteListener { task->
                 if(task.isSuccessful){
-                    val todo:Todo = Todo("할 일을 입력하세요.", "", "", "", "", "", "")
-                    val document = "할 일을 입력하세요."
-                    firestore = FirebaseFirestore.getInstance()
-                    firestore?.collection(mail)?.document(document)
-                        ?.set(todo)?.addOnCompleteListener { task->
-                            if(task.isSuccessful){
-                                Toast.makeText(this, "회원가입 성공. 환영합니다.", Toast.LENGTH_LONG).show()
-                            }else{
-                                Toast.makeText(this, task.exception?.message, Toast.LENGTH_LONG).show()
-                            }
-                        }
+                    //회원 가입이 성공한 경우
+                    createDB(emailTxt)
                 }else{
-                    Toast.makeText(this, "회원가입에 실패했습니다. 메일 주소를 확인해주세요.", Toast.LENGTH_LONG).show()
+                    //회원 가입에 실패한 경우
+                    Toast.makeText(this, "회원가입 실패. 아이디를 확인해 주세요.", Toast.LENGTH_LONG).show()
+                }
+            }
+    }
+
+    private fun createDB(email:String){
+        val todo = Todo("Enter what you have to do", "날짜", "장소의 이름", "장소의 위도", "장소의 경도", "간략 주소", "인덱스 컬러" ,false)
+
+        firestore = FirebaseFirestore.getInstance()
+        firestore?.collection("$email")?.document("Enter what you have to do")
+            ?.set(todo)?.addOnCompleteListener{task->
+                if(task.isSuccessful){
+                    Toast.makeText(this, "Created DB", Toast.LENGTH_LONG).show()
+                }else{
+                    Toast.makeText(this, task.exception?.message, Toast.LENGTH_LONG).show()
                 }
             }
     }
