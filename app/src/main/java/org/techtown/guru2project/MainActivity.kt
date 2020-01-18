@@ -3,6 +3,7 @@ package org.techtown.guru2project
 import android.content.Intent
 import android.os.Bundle
 import android.text.style.StrikethroughSpan
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -13,42 +14,17 @@ import java.time.format.DateTimeFormatter
 import java.util.*
 
 class MainActivity : AppCompatActivity() {
+    private var adapter: TodoAdapter? = null
+    private var firestore:FirebaseFirestore? = null
+
     companion object {
         val REQUEST_CODE = 0
         val RESULT = "result"
-        val EMAIL = "email"
-        val PW = "password"
-        val REQUEST_CODE_MENU = 1000
-        val RESULT_TODO = "TODO"
-        val RESULT_DATE = "DATE"
-        val RESULT_PLACE = "PLACE"
-        val RESULT_LAT = "LATITUDE"
-        val RESULT_LONG = "LONGITUDE"
-        val RESULT_INDEX = "INDEX"
     }
-    private var firestore:FirebaseFirestore? = null
+
     var email:String = "User"
     val mStrikeThrough = StrikethroughSpan()
 
-    private lateinit var adapter: TodoAdapter
-    private var todoList = arrayListOf<Todo>(
-        Todo(
-            "위도, 경도 받아오기", "2020.01.17", "태능약국",
-            "37.619087", "127.07819", "서울시 노원구", "pinkindex", false
-        ),
-        Todo(
-            "RecyclerView 완성하기", "2020.01.17", "태능약국",
-            "37.619087", "127.07819", "경기도 부천시", "pinkindex", false
-        ),
-        Todo(
-            "firebase랑 연결하기", "2020.01.17", "태능약국",
-            "37.619087", "127.07819", "경기도 남양주시", "pinkindex", false
-        ),
-        Todo(
-            "구루 이새끼 넘 힘들다", "2020.01.17", "태능약국",
-            "37.619087", "127.07819", "서울시 노원구", "pinkindex", false
-        )
-    )
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -60,7 +36,6 @@ class MainActivity : AppCompatActivity() {
         val formattedDate= current.format(formatterDate)
         val formatterDay = DateTimeFormatter.ofPattern("EEEE", Locale.KOREA)
         val formattedDay = current.format(formatterDay)
-
         dayText_main.text = formattedDay
         dateText_main2.text = formattedDate
 
@@ -90,17 +65,21 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+        /* recyclerview 추가 */
         RecyclerView.layoutManager = LinearLayoutManager(this)
         adapter = TodoAdapter(this) {
             //Toast.makeText(this, "Todo: ${it.todo}, Date: ${it.date}", Toast.LENGTH_SHORT).show()
         }
-        adapter.setItems(todoList)
         RecyclerView.adapter = adapter
+
+        viewDatabase()
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
 
+
         if (requestCode != REQUEST_CODE) return
+
         val res = data?.getStringExtra(RESULT)
         if (res == "logout" || res == "delete") {
             //val intent = Intent(this, LoginActivity::class.java)
@@ -112,8 +91,23 @@ class MainActivity : AppCompatActivity() {
 
     private fun createNewDoc(name:String){
         val document = name
-
         firestore = FirebaseFirestore.getInstance()
     }
 
+    private fun viewDatabase() {
+        firestore = FirebaseFirestore.getInstance()
+        firestore?.collection("$email")?.get()
+            ?.addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    for (dc in task.result!!.documents) {
+                        var todo = dc.toObject(Todo::class.java)
+                        adapter?.addItem(todo!!)
+                    }
+                    adapter?.notifyDataSetChanged()
+                }
+                else {
+                    Toast.makeText(this, task.exception?.message, Toast.LENGTH_LONG).show()
+                }
+            }
+    }
 }

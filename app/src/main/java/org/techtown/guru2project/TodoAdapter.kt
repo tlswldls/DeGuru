@@ -56,8 +56,9 @@ class TodoAdapter (val context: Context, val itemCheck: (Todo) -> Unit)
             var isStriked: Boolean = false
             itemView.tvTodo.text = item.todo
             itemView.setOnClickListener(){
+//                itemCheck(item)
                 // 할 일 완료 후 취소선 넣기
-                var length: Int = item.todo.length
+                var length: Int = item.todo!!.length
                 var SS: SpannableString = SpannableString(item.todo)
                 if(isStriked == false) {
                     SS.setSpan(StrikethroughSpan(), 0, length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
