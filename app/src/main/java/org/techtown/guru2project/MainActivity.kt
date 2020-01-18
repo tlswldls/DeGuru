@@ -10,6 +10,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_main.*
+import java.text.SimpleDateFormat
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
+import java.util.*
 
 class MainActivity : AppCompatActivity() {
     companion object {
@@ -51,6 +55,18 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        // 요일, 날짜 설정
+        val current = LocalDateTime.now()
+        val formatterDate = DateTimeFormatter.ofPattern("MM.dd", Locale.KOREA)
+        val formattedDate= current.format(formatterDate)
+        val formatterDay = DateTimeFormatter.ofPattern("EEEE", Locale.KOREA)
+        val formattedDay = current.format(formatterDay)
+
+        dayText_main.text = formattedDay
+        dateText_main2.text = formattedDate
+
+
 
         if(intent.hasExtra("mail")){
             email = intent.getStringExtra("mail")
