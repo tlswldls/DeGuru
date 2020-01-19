@@ -11,7 +11,7 @@
         <!--Status Bar 글자색깔-->
         <item name="android:windowLightStatusBar">true</item>
 
-
-        출처: https://itpangpang.xyz/335 [ITPangPang]
     </style>
+
+    <style name="SplashTheme" parent="Theme.AppCompat.Light.NoActionBar"/>
 </resources>

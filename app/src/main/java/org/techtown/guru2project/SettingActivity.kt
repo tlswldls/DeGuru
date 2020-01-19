@@ -13,7 +13,6 @@ import org.techtown.guru2project.Fragment.*
 
 class SettingActivity : AppCompatActivity() {
     private var firestore: FirebaseFirestore? = null
-    private var bundle:Bundle = bundleOf()
     private var email:String= ""
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -22,6 +21,10 @@ class SettingActivity : AppCompatActivity() {
         //메인에서 사용자의 메일 데이터, 해야 할 일의 이름 데이터를 받아온다.
         email = intent.getStringExtra("mail")
         val name = intent.getStringExtra("todo")
+
+        //Activity의 txt데이터를 수정
+        todoName.text = name
+        mailAdr.text = email
 
         //객체를 생성해 DB에 저장한다.
         var todo: Todo?
@@ -43,9 +46,7 @@ class SettingActivity : AppCompatActivity() {
                     //있으면 DB에서 삭제하기
                     firestore?.collection("$email")?.document("Enter what you have to do")?.delete()
                         ?.addOnCompleteListener { task->
-                            if(task.isSuccessful){
-                                Toast.makeText(this, "delete default data Completed", Toast.LENGTH_LONG).show()
-                            }else{
+                            if(!task.isSuccessful){
                                 Toast.makeText(this, task.exception?.message, Toast.LENGTH_LONG).show()
                             }
                         }
