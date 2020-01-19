@@ -4,8 +4,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.google.firebase.firestore.FirebaseFirestore
+import kotlinx.android.synthetic.main.activity_setting.*
 import kotlinx.android.synthetic.main.fragment_index.*
 import org.techtown.guru2project.R
 import org.techtown.guru2project.Todo
@@ -17,6 +19,9 @@ import java.util.ArrayList
 class IndexFragment : Fragment() {
     var indexColor: String = "color"
     private var firestore: FirebaseFirestore? = null
+
+    var email:String = mailAdr.text.toString()
+    var todo:String = todoName.text.toString()
 
 
     override fun onCreateView(
@@ -49,6 +54,15 @@ class IndexFragment : Fragment() {
         }
         btnSetIndex.setOnClickListener {
             textView3.setText("$indexColor 로 설정")
+            var map = mutableMapOf<String, Any>()
+            map["index"]= indexColor
+            firestore = FirebaseFirestore.getInstance()
+            firestore?.collection("$email")?.document("$todo")?.update(map)
+                ?.addOnCompleteListener { task ->
+                    if(!task.isSuccessful){
+                        indexColor = task.exception?.message.toString()
+                    }
+                }
         }
     }
 }

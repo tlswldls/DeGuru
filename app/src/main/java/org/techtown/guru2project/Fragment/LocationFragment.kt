@@ -20,6 +20,7 @@ import com.google.android.gms.location.LocationResult
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.model.LatLng
+import kotlinx.android.synthetic.main.activity_setting.*
 import kotlinx.android.synthetic.main.fragment_location.*
 import okhttp3.HttpUrl.Companion.toHttpUrlOrNull
 import okhttp3.OkHttpClient
@@ -52,7 +53,9 @@ class LocationFragment : Fragment(), OnMapReadyCallback{
     private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
     private lateinit var locationRequest: LocationRequest
     private lateinit var locationCallback: MyLocationCallBack
-    //val email = (activity as SettingActivity).getEmail()
+
+    var email:String = mailAdr.text.toString()
+    var todo:String = todoName.text.toString()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
