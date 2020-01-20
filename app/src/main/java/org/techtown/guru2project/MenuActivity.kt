@@ -19,25 +19,23 @@ class MenuActivity : AppCompatActivity() {
         }
 
         logoutBtn_menu.setOnClickListener {
-            val intent = intent?:return@setOnClickListener
-            intent.putExtra(MainActivity.RESULT, "logout")
-            setResult(MainActivity.REQUEST_CODE, intent)
+            val intent = Intent(this, LoginActivity::class.java)
+            startActivity(intent)
             finish()
         }
 
         deleteBtn_menu.setOnClickListener {
             //파이어베이스에서 사용자 계정 삭제하는 코드
             deleteID()
-            val intent = intent?:return@setOnClickListener
-            intent.putExtra(MainActivity.RESULT, "delete")
-            setResult(MainActivity.REQUEST_CODE, intent)
+            val intent = Intent(this, LoginActivity::class.java)
+            startActivity(intent)
             finish()
         }
 
         backBtn_menu.setOnClickListener {
-            val intent = intent?:return@setOnClickListener
-            intent.putExtra(MainActivity.RESULT, "result")
-            setResult(MainActivity.REQUEST_CODE, intent)
+            val intent = Intent(this, MainActivity::class.java)
+            intent.putExtra("mail", useridText_menu.text.toString())
+            startActivity(intent)
             finish()
         }
     }
