@@ -438,7 +438,7 @@ class LocationFragment : Fragment(), OnMapReadyCallback{
 
     }
 
-    //
+    //DB에 장소의 위도, 경도 정보 업데이트
     private fun setTargetLocation(latitude: Double, longitude: Double){
         var map = mutableMapOf<String, Any>()
         map["latitude"] = latitude

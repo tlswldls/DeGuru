@@ -31,10 +31,6 @@ class TodoAdapter (val context: Context, val itemCheck: (Todo) -> Unit)
     }
 
 
-    fun setItems(items: ArrayList<Todo>) {
-        this.items = items
-    }
-
     fun addItem(item: Todo) {
         items.add(item)
     }

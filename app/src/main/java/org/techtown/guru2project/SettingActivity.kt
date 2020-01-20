@@ -1,5 +1,6 @@
 package org.techtown.guru2project
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -76,6 +77,9 @@ class SettingActivity : AppCompatActivity() {
 //        tabLayout.getTabAt(2)?.setIcon(R.drawable.icon3)
 
         backBtn_menu.setOnClickListener {
+            val intent = Intent(this, MainActivity::class.java)
+            intent.putExtra("mail", email)
+            startActivity(intent)
             finish()
         }
 

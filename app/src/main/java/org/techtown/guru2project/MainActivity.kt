@@ -43,7 +43,6 @@ class MainActivity : AppCompatActivity() {
         /* 로그인 정보 가져오기 */
         if(intent.hasExtra("mail")){
             email = intent.getStringExtra("mail")
-            Toast.makeText(this, "환영합니다"+email+"님", Toast.LENGTH_LONG).show()
         }else{
             Toast.makeText(this, "로그인 정보를 가져오기에 실패했습니다.", Toast.LENGTH_LONG).show()
         }
@@ -51,7 +50,8 @@ class MainActivity : AppCompatActivity() {
         meueBrn_main2.setOnClickListener {
             val intent = Intent(this, MenuActivity::class.java)
             intent.putExtra("mail", email)
-            startActivityForResult(intent, REQUEST_CODE)
+            startActivity(intent)
+            finish()
         }
 
         imageButton.setOnClickListener {
@@ -60,6 +60,7 @@ class MainActivity : AppCompatActivity() {
                 intent.putExtra("todo", editText_main.text.toString())
                 intent.putExtra("mail", email)
                 startActivity(intent)
+                finish()
             }else{
                 Toast.makeText(this, "할 일을 추가해 주세요.", Toast.LENGTH_LONG).show()
             }
