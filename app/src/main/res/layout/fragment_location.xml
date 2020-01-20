@@ -13,7 +13,7 @@
         android:background="@drawable/mapsearchbar"
         android:ems="10"
         android:inputType="textPersonName"
-        android:paddingLeft="35dp"
+        android:paddingLeft="15dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -27,7 +27,7 @@
         android:background="@drawable/btnsearch"
         app:layout_constraintBottom_toBottomOf="@+id/enSearch"
         app:layout_constraintEnd_toEndOf="@+id/enSearch"
-        app:layout_constraintHorizontal_bias="0.03"
+        app:layout_constraintHorizontal_bias="0.94"
         app:layout_constraintStart_toStartOf="@+id/enSearch"
         app:layout_constraintTop_toTopOf="@+id/enSearch" />
 
