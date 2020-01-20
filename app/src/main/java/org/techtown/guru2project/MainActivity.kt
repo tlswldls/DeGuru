@@ -3,7 +3,6 @@ package org.techtown.guru2project
 import android.content.Intent
 import android.os.Bundle
 import android.text.style.StrikethroughSpan
-import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -83,8 +82,6 @@ class MainActivity : AppCompatActivity() {
 
         val res = data?.getStringExtra(RESULT)
         if (res == "logout" || res == "delete") {
-            //val intent = Intent(this, LoginActivity::class.java)
-            //startActivity(intent)
             finish()
         }
         super.onActivityResult(requestCode, resultCode, data)
