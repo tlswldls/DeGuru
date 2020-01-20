@@ -53,7 +53,7 @@ class JoinActivity : AppCompatActivity() {
     }
 
     private fun createDB(email:String){
-        val todo = Todo("Enter what you have to do", "날짜", "장소의 이름", "장소의 위도", "장소의 경도", "간략 주소", "인덱스 컬러" ,false)
+        val todo = Todo("Enter what you have to do", "날짜", "장소의 이름", 0.0, 0.0, "간략 주소", "인덱스 컬러" ,false)
 
         firestore = FirebaseFirestore.getInstance()
         firestore?.collection("$email")?.document("Enter what you have to do")
