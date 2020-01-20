@@ -3,8 +3,10 @@ package org.techtown.guru2project
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.FrameLayout
 import android.widget.Toast
 import androidx.core.os.bundleOf
+import androidx.fragment.app.Fragment
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_setting.*
 import kotlinx.android.synthetic.main.fragment_date.*
@@ -13,18 +15,19 @@ import org.techtown.guru2project.Fragment.*
 
 class SettingActivity : AppCompatActivity() {
     private var firestore: FirebaseFirestore? = null
-    private var email:String= ""
+    private var email:String? = null
+    private var name:String? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_setting)
 
         //메인에서 사용자의 메일 데이터, 해야 할 일의 이름 데이터를 받아온다.
         email = intent.getStringExtra("mail")
-        val name = intent.getStringExtra("todo")
+        name = intent.getStringExtra("todo")
 
-        //Activity의 txt데이터를 수정
-        todoName.text = name
-        mailAdr.text = email
+        //프래그먼트로 해야 할 일의 데이터를 넘긴다.
+
 
         //객체를 생성해 DB에 저장한다.
         var todo: Todo?
@@ -61,6 +64,12 @@ class SettingActivity : AppCompatActivity() {
         viewPager.adapter = adapter
         tabLayout.setupWithViewPager(viewPager)
 
+
+
+
+
+
+
         // tab 아이콘
 //        tabLayout.getTabAt(0)?.setIcon(R.drawable.icon1)
 //        tabLayout.getTabAt(1)?.setIcon(R.drawable.icon2)
@@ -72,7 +81,11 @@ class SettingActivity : AppCompatActivity() {
 
     }
 
-    fun getEmail():String{
-        return email
+    public fun getEmail():String {
+        return email!!
+    }
+
+    public fun getName(): String {
+        return name!!
     }
 }
