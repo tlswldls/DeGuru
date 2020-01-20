@@ -8,12 +8,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.todo_item.view.*
 import java.util.*
 
 class TodoAdapter (val context: Context, val itemCheck: (Todo) -> Unit)
     : RecyclerView.Adapter<TodoAdapter.ViewHolder>() {
     private var items = ArrayList<Todo>()
+    private var firestore: FirebaseFirestore? = null
+
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ViewHolder {
         val inflater = LayoutInflater.from(viewGroup.context)
@@ -66,6 +69,18 @@ class TodoAdapter (val context: Context, val itemCheck: (Todo) -> Unit)
                     itemView.tvTodo.text = SS
                     isStriked = false
                 }
+
+                //isStriked의 변경된 내용을 DB에 저장
+                val email:String = MainActivity().email
+                var map = mutableMapOf<String, Any>()
+                map["done"] = isStriked
+                firestore = FirebaseFirestore.getInstance()
+                firestore?.collection("$email")?.document("$item.todo")?.update(map)
+                    ?.addOnCompleteListener { task ->
+                        if(!task.isSuccessful){
+
+                        }
+                    }
             }
         }
     }

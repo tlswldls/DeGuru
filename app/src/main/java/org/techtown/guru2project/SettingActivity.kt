@@ -3,15 +3,9 @@ package org.techtown.guru2project
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import android.widget.FrameLayout
 import android.widget.Toast
-import androidx.core.os.bundleOf
-import androidx.fragment.app.Fragment
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_setting.*
-import kotlinx.android.synthetic.main.fragment_date.*
-import org.jetbrains.anko.toast
 import org.techtown.guru2project.Fragment.*
 
 class SettingActivity : AppCompatActivity() {
@@ -27,18 +21,13 @@ class SettingActivity : AppCompatActivity() {
         email = intent.getStringExtra("mail")
         name = intent.getStringExtra("todo")
 
-        //프래그먼트로 해야 할 일의 데이터를 넘긴다.
-
-
         //객체를 생성해 DB에 저장한다.
         var todo: Todo?
         todo = Todo(name, "", "", 0.0, 0.0, "", "", false)
         firestore = FirebaseFirestore.getInstance()
         firestore?.collection("$email")?.document("$name")
             ?.set(todo)?.addOnCompleteListener { task ->
-                if(task.isSuccessful){
-                    Toast.makeText(this, "DB에 새로운 할 일을 추가했습니다.", Toast.LENGTH_LONG).show()
-                }else{
+                if(!task.isSuccessful){
                     Toast.makeText(this, task.exception?.message, Toast.LENGTH_LONG).show()
                 }
             }

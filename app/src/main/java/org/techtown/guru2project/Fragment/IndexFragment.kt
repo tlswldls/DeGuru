@@ -34,7 +34,6 @@ class IndexFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val extra:Bundle? = this.arguments
-        val todoData = extra?.getStringArrayList("todoData")
 
         val act = activity as SettingActivity
         email = act.getEmail()

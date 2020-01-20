@@ -58,9 +58,7 @@ class JoinActivity : AppCompatActivity() {
         firestore = FirebaseFirestore.getInstance()
         firestore?.collection("$email")?.document("Enter what you have to do")
             ?.set(todo)?.addOnCompleteListener{task->
-                if(task.isSuccessful){
-                    Toast.makeText(this, "Created DB", Toast.LENGTH_LONG).show()
-                }else{
+                if(!task.isSuccessful){
                     Toast.makeText(this, task.exception?.message, Toast.LENGTH_LONG).show()
                 }
             }
