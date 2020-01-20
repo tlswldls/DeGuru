@@ -31,7 +31,7 @@ class SettingActivity : AppCompatActivity() {
 
         //객체를 생성해 DB에 저장한다.
         var todo: Todo?
-        todo = Todo(name, "", "", "", "", "", "", false)
+        todo = Todo(name, "", "", 0.0, 0.0, "", "", false)
         firestore = FirebaseFirestore.getInstance()
         firestore?.collection("$email")?.document("$name")
             ?.set(todo)?.addOnCompleteListener { task ->

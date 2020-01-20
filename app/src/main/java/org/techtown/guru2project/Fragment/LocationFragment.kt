@@ -20,7 +20,9 @@ import com.google.android.gms.location.LocationResult
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.model.LatLng
+import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_setting.*
+import kotlinx.android.synthetic.main.fragment_date.*
 import kotlinx.android.synthetic.main.fragment_location.*
 import okhttp3.HttpUrl.Companion.toHttpUrlOrNull
 import okhttp3.OkHttpClient
@@ -53,9 +55,10 @@ class LocationFragment : Fragment(), OnMapReadyCallback{
     private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
     private lateinit var locationRequest: LocationRequest
     private lateinit var locationCallback: MyLocationCallBack
+    private var firestore: FirebaseFirestore? = null
 
-    var email:String = mailAdr.text.toString()
-    var todo:String = todoName.text.toString()
+    var email:String = ""
+    var name:String = ""
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -69,6 +72,11 @@ class LocationFragment : Fragment(), OnMapReadyCallback{
         // API 이용해서 검색한 장소의 위도, 경도 받아오는 코드 //
         super.onViewCreated(view, savedInstanceState)
         searchBtn.setOnClickListener{
+
+            val act = activity as SettingActivity
+            email = act.getEmail()
+            name = act.getName()
+
             //val positions: List<Float>
             if(enSearch.text.isNotEmpty()){
                 try{
@@ -203,6 +211,8 @@ class LocationFragment : Fragment(), OnMapReadyCallback{
         lanch2.await()
 
         //DB에 위치 정보를 업데이트
+        setTargetLocation(targetLatitude, targetLongitude)
+
 
         //위도 경도 넘겨주기
         return result
@@ -291,13 +301,6 @@ class LocationFragment : Fragment(), OnMapReadyCallback{
 
     override fun onMapReady(p0: GoogleMap?) {
 
-        //mMap = googleMap    // 3
-/*
-        // 시드니에 마커를 추가하고 카메라를 이동합니다     4
-        val sydney = LatLng(-34.0, 151.0)
-        mMap.addMarker(MarkerOptions().position(sydney).title("Marker in Sydney"))
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney))
-*/
         // 권한 요청
         permissionCheck(cancel = {
             showPermissionInfoDialog()
@@ -398,7 +401,6 @@ class LocationFragment : Fragment(), OnMapReadyCallback{
             location?.run {
                 // 14 level로 확대하며 현재 위치로 카메라 이동
                 val latLng = LatLng(latitude, longitude)
-                //mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 17f))
 
                 textView2.text = "나의 위도: $latitude, 나의 경도: $longitude"
                 myLatitude = latitude
@@ -433,6 +435,21 @@ class LocationFragment : Fragment(), OnMapReadyCallback{
         } else{
             Toast.makeText(context, "target 반경 내에 있지 않습니다.", Toast.LENGTH_LONG).show()
         }
+
+    }
+
+    //
+    private fun setTargetLocation(latitude: Double, longitude: Double){
+        var map = mutableMapOf<String, Any>()
+        map["latitude"] = latitude
+        map["longitude"] = longitude
+        firestore = FirebaseFirestore.getInstance()
+        firestore?.collection("$email")?.document("$name")?.update(map)
+            ?.addOnCompleteListener { task ->
+                if(!task.isSuccessful){
+                    textView.text = task.exception?.message.toString()
+                }
+            }
 
     }
 }
