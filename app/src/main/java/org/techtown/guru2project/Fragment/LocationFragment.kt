@@ -59,6 +59,8 @@ class LocationFragment : Fragment(), OnMapReadyCallback{
 
     var email:String = ""
     var name:String = ""
+    var result:String=""
+    var place:String=""
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -85,8 +87,8 @@ class LocationFragment : Fragment(), OnMapReadyCallback{
                     resultTxt.text = e.message
                 }
             }
-            diffLatitude = LatitudeInDifference(300)
-            diffLongitude = LongitudeInDifference(targetLatitude, 300)
+            diffLatitude = LatitudeInDifference(500)
+            diffLongitude = LongitudeInDifference(targetLatitude, 500)
 
             viewLat.setText("${targetLatitude-diffLatitude} ~ ${targetLatitude+diffLatitude}")
             viewLong.setText("${myLongitude-diffLongitude} ~ ${myLongitude+diffLongitude}")
@@ -104,8 +106,7 @@ class LocationFragment : Fragment(), OnMapReadyCallback{
         val client = OkHttpClient()
         val itemList: ArrayList<HashMap<String, String>> = ArrayList()
 
-        var result:String=""
-        var place:String=""
+
 
         /*
 
@@ -279,24 +280,10 @@ class LocationFragment : Fragment(), OnMapReadyCallback{
         locationRequest = LocationRequest()
         // GPS 우선
         locationRequest.priority = LocationRequest.PRIORITY_HIGH_ACCURACY
-        // 업데이트 인터벌
-        // 위치 정보가 없을 때는 업데이트 안 함
-        // 상황에 따라 짧아질 수 있음, 정확하지 않음
-        // 다른 앱에서 짧은 인터벌로 위치 정보를 요청하면 짧아질 수 있음
+        // 업데이트 인터벌, 위치 정보가 없을 때는 업데이트 안 함
         locationRequest.interval = 10000
-        // 정확함. 이것보다 짧은 업데이트는 하지 않음
         locationRequest.fastestInterval = 5000
     }
-
-    /**
-     * 사용 가능한 맵을 조작합니다.
-     * 지도가 사용될 준비가 되면 이 콜백이 호출됩니다.
-     * 여기서 마커나 선을 추가하거나 청취자를 추가하거나 카메라를 이동할 수 있습니다.
-     * 호주 시드니 근처에 표식을 추가하고 있습니다.
-     * Google Play 서비스가 기기에 설치되어 있지 않으면 사용자에게 설치하라는 메시지가 표시됩니다.
-     * SupportMapFragment 안에 있습니다. 이 메소드는 한 번만 호출됩니다.
-     * Google Play 서비스가 설치되고 앱으로 돌아 옵니다.
-     */
 
     override fun onMapReady(p0: GoogleMap?) {
 
@@ -311,12 +298,12 @@ class LocationFragment : Fragment(), OnMapReadyCallback{
     override fun onResume() {
         super.onResume()
 
-        // 권한 요청 ⑨
+        // 권한 요청
         permissionCheck(cancel = {
-            // 위치 정보가 필요한 이유 다이얼로그 표시 ⑩
+            // 위치 정보가 필요한 이유 다이얼로그 표시
             showPermissionInfoDialog()
         }, ok = {
-            // 현재 위치를 주기적으로 요청 (권한이 필요한 부분) ⑪
+            // 현재 위치를 주기적으로 요청 (권한이 필요한 부분)
             addLocationListener()
         })
     }
@@ -430,9 +417,19 @@ class LocationFragment : Fragment(), OnMapReadyCallback{
             && myLatitude <= (targetLatitude+ diffLatitude)
             && (targetLongitude- diffLongitude) <= myLongitude
             && myLongitude<=(targetLongitude+ diffLongitude)){
-            Toast.makeText(context, "target 가까이에 왔습니다.", Toast.LENGTH_LONG).show()
+            AlertDialog.Builder(context).apply {
+                setTitle("아-맞다 알림")
+                setMessage("$place 가 주변에 있습니다.")
+                setPositiveButton("Yes", null)
+                setNegativeButton("Cancel", null)
+            }.show()
         } else{
-            Toast.makeText(context, "target 반경 내에 있지 않습니다.", Toast.LENGTH_LONG).show()
+            AlertDialog.Builder(context).apply {
+            setTitle("아-맞다 알림")
+            setMessage("$place 은(는) 반경 내에 있지 않습니다.")
+            setPositiveButton("Yes", null)
+            setNegativeButton("Cancel", null)
+        }.show()
         }
 
     }
