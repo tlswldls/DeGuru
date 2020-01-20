@@ -105,6 +105,7 @@ class LocationFragment : Fragment(), OnMapReadyCallback{
         val itemList: ArrayList<HashMap<String, String>> = ArrayList()
 
         var result:String=""
+        var place:String=""
 
         /*
 
@@ -112,9 +113,7 @@ class LocationFragment : Fragment(), OnMapReadyCallback{
         var lanch1 = CountDownLatch(1)
         client.newCall(request_p).enqueue(object: okhttp3.Callback{
             override fun onFailure(call: okhttp3.Call, e: IOException) {
-                val body = e.message
                 lanch1.countDown()
-                //Toast.makeText(this, body, Toast.LENGTH_LONG).show()
             }
 
             override fun onResponse(call: okhttp3.Call, response: okhttp3.Response) {
@@ -185,11 +184,12 @@ class LocationFragment : Fragment(), OnMapReadyCallback{
                     itemList.add(dataHashMap)
                 }
 
-                //위도 경도 값을 숫자로 바꾸기
+                //위도 경도 값을 숫자로 바꾸고 장소의 이름 값 저장
                 for (n in 0 until itemList.size){
                     var position = toNum(itemList[n].get("XPos").toString(), itemList[n].get("YPos").toString()) //x, y좌표를 배열에 추가
 
                     positions.add(position)
+                    place = itemList[n].get("yadmNm").toString()
                 }
 
                 for(n in 0 until positions.size){
@@ -198,7 +198,6 @@ class LocationFragment : Fragment(), OnMapReadyCallback{
                     targetLongitude = positions[n][0].toDouble()
                 }
                 lanch2.countDown()
-                    //resultTxt.text = result
             }
 
             //실패한 경우
@@ -211,7 +210,7 @@ class LocationFragment : Fragment(), OnMapReadyCallback{
         lanch2.await()
 
         //DB에 위치 정보를 업데이트
-        setTargetLocation(targetLatitude, targetLongitude)
+        setTargetLocation(targetLatitude, targetLongitude, place)
 
 
         //위도 경도 넘겨주기
@@ -439,10 +438,11 @@ class LocationFragment : Fragment(), OnMapReadyCallback{
     }
 
     //DB에 장소의 위도, 경도 정보 업데이트
-    private fun setTargetLocation(latitude: Double, longitude: Double){
+    private fun setTargetLocation(latitude: Double, longitude: Double, place:String){
         var map = mutableMapOf<String, Any>()
         map["latitude"] = latitude
         map["longitude"] = longitude
+        map["place"] = place
         firestore = FirebaseFirestore.getInstance()
         firestore?.collection("$email")?.document("$name")?.update(map)
             ?.addOnCompleteListener { task ->
